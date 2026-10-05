@@ -19,17 +19,18 @@ type Limits struct {
 	MaxFileBytes        int64
 	MaxTotalBytes       int64
 	MaxJSONBytes        int64
+	MaxTotalJSONBytes   int64
 	MaxJSONDepth        int
 	MaxNDJSONLineBytes  int64
 	MaxCompressionRatio float64
 }
 
 func DefaultLimits() Limits {
-	return Limits{MaxEntries: 100000, MaxPathBytes: 4096, MaxTreeDepth: 256, MaxFileBytes: 8 << 30, MaxTotalBytes: 64 << 30, MaxJSONBytes: 16 << 20, MaxJSONDepth: 64, MaxNDJSONLineBytes: 1 << 20, MaxCompressionRatio: 1000}
+	return Limits{MaxEntries: 100000, MaxPathBytes: 4096, MaxTreeDepth: 256, MaxFileBytes: 8 << 30, MaxTotalBytes: 64 << 30, MaxJSONBytes: 16 << 20, MaxTotalJSONBytes: 64 << 20, MaxJSONDepth: 64, MaxNDJSONLineBytes: 1 << 20, MaxCompressionRatio: 1000}
 }
 func (l Limits) Validate() error {
 	if l.MaxPathBytes <= 0 || l.MaxTreeDepth <= 0 || l.MaxEntries <= 0 || l.MaxFileBytes <= 0 || l.MaxTotalBytes <= 0 ||
-		l.MaxJSONBytes <= 0 || l.MaxJSONBytes == math.MaxInt64 || l.MaxJSONDepth <= 0 ||
+		l.MaxTotalJSONBytes <= 0 || l.MaxJSONBytes <= 0 || l.MaxJSONBytes == math.MaxInt64 || l.MaxJSONDepth <= 0 ||
 		l.MaxNDJSONLineBytes <= 0 || l.MaxCompressionRatio <= 0 ||
 		math.IsNaN(l.MaxCompressionRatio) || math.IsInf(l.MaxCompressionRatio, 0) {
 		return protocolError(ReasonResourceLimit, "invalid resource policy")
