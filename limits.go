@@ -14,6 +14,8 @@ import (
 // positive. Codecs must enforce these before allocation/expansion/publication.
 type Limits struct {
 	MaxEntries          int
+	MaxPathBytes        int
+	MaxTreeDepth        int
 	MaxFileBytes        int64
 	MaxTotalBytes       int64
 	MaxJSONBytes        int64
@@ -23,10 +25,10 @@ type Limits struct {
 }
 
 func DefaultLimits() Limits {
-	return Limits{100000, 8 << 30, 64 << 30, 16 << 20, 64, 1 << 20, 1000}
+	return Limits{MaxEntries: 100000, MaxPathBytes: 4096, MaxTreeDepth: 256, MaxFileBytes: 8 << 30, MaxTotalBytes: 64 << 30, MaxJSONBytes: 16 << 20, MaxJSONDepth: 64, MaxNDJSONLineBytes: 1 << 20, MaxCompressionRatio: 1000}
 }
 func (l Limits) Validate() error {
-	if l.MaxEntries <= 0 || l.MaxFileBytes <= 0 || l.MaxTotalBytes <= 0 ||
+	if l.MaxPathBytes <= 0 || l.MaxTreeDepth <= 0 || l.MaxEntries <= 0 || l.MaxFileBytes <= 0 || l.MaxTotalBytes <= 0 ||
 		l.MaxJSONBytes <= 0 || l.MaxJSONBytes == math.MaxInt64 || l.MaxJSONDepth <= 0 ||
 		l.MaxNDJSONLineBytes <= 0 || l.MaxCompressionRatio <= 0 ||
 		math.IsNaN(l.MaxCompressionRatio) || math.IsInf(l.MaxCompressionRatio, 0) {
