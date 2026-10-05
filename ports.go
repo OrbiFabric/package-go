@@ -63,6 +63,9 @@ type Signer interface {
 // TrustPolicy is explicit Host authority, separate from signature mathematics.
 // Purpose distinguishes Version signing from each independent evidence kind.
 type TrustRequest struct {
+	// Evidence purposes carry issuer/key labels, never Version official claims.
+	Issuer    string
+	KeyID     string
 	Purpose   string
 	PublicKey []byte
 	Official  json.RawMessage
