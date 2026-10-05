@@ -203,6 +203,9 @@ func inspectTransfer(ctx context.Context, source TreeReader, l Limits, support C
 	if err != nil {
 		return History{}, p, err
 	}
+	if err = validateAttestationDeclarations(ctx, source, h, l, support); err != nil {
+		return History{}, p, err
+	}
 	memory, err := readPortableMemory(ctx, source, h, l)
 	if err != nil {
 		return History{}, p, err

@@ -96,6 +96,10 @@ func Verify(ctx context.Context, source SnapshotSource, l Limits, options Verifi
 		out.Result = rejectedVerification(out.Result, err, false)
 		return out, err
 	}
+	if err = validateAttestationDeclarations(ctx, snapshot, h, l, options.Support); err != nil {
+		out.Result = rejectedVerification(out.Result, err, false)
+		return out, err
+	}
 	// Portable schema/references precede content. Core missing files are empty
 	// observations; required Complete presence is coupled only after all checks.
 	memoryPresent := false
@@ -137,6 +141,11 @@ func Verify(ctx context.Context, source SnapshotSource, l Limits, options Verifi
 			return out, err
 		}
 		mergeVerificationReasons(&out.Result, out.Signatures.ReasonCodes)
+		if containsReason(out.Signatures.ReasonCodes, ReasonInvalidSchema) {
+			err = schemaError("known signature control schema is invalid")
+			out.Result = rejectedVerification(out.Result, err, false)
+			return out, err
+		}
 	} else {
 		out.Result.Signature = SignatureNotChecked
 	}
@@ -147,6 +156,11 @@ func Verify(ctx context.Context, source SnapshotSource, l Limits, options Verifi
 		}
 		out.Result.Evidence = out.Evidence.State
 		mergeVerificationReasons(&out.Result, out.Evidence.ReasonCodes)
+		if containsReason(out.Evidence.ReasonCodes, ReasonInvalidSchema) {
+			err = schemaError("known evidence control schema is invalid")
+			out.Result = rejectedVerification(out.Result, err, false)
+			return out, err
+		}
 	} else {
 		out.Result.Evidence = EvidenceNotChecked
 	}
