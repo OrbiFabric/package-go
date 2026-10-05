@@ -275,7 +275,7 @@ func allowedControl(p, kind string, declared map[string]bool) bool {
 func validateControlJSONBudget(entries []TreeEntry, l Limits) error {
 	var total int64
 	for _, entry := range entries {
-		if entry.Kind == "file" && strings.HasPrefix(entry.Path, ".packtell/") && strings.HasSuffix(entry.Path, ".json") && !strings.HasPrefix(entry.Path, ".packtell/extensions/") {
+		if entry.Kind == "file" && (controlJSONPath(entry.Path) || entry.Path == ".packtell/history/events.ndjson") {
 			if entry.Size > l.MaxTotalJSONBytes-total {
 				return protocolError(ReasonResourceLimit, "aggregate control JSON byte budget")
 			}
@@ -283,4 +283,8 @@ func validateControlJSONBudget(entries []TreeEntry, l Limits) error {
 		}
 	}
 	return nil
+}
+
+func controlJSONPath(path string) bool {
+	return strings.HasPrefix(path, ".packtell/") && strings.HasSuffix(path, ".json") && !strings.HasPrefix(path, ".packtell/extensions/")
 }
