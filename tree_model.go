@@ -161,6 +161,15 @@ func (i *IdentityInventory) Observe(ctx context.Context, m Manifest, l Limits) e
 	if m.PackageID != i.packageID {
 		return schemaError("cross-Package manifest")
 	}
+	newIDs := 0
+	for _, entry := range m.Entries {
+		if _, exists := i.kinds[entry.ID()]; !exists {
+			newIDs++
+		}
+	}
+	if newIDs > l.MaxEntries-len(i.kinds) {
+		return protocolError(ReasonResourceLimit, "historical entity count")
+	}
 	for _, e := range m.Entries {
 		if kind, ok := i.kinds[e.ID()]; ok && kind != e.Kind {
 			return schemaError("historical entity ID changed kind")
