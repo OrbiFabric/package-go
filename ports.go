@@ -28,7 +28,7 @@ type TreeReader interface {
 // A revision is transient Host selection state and must never be serialized in
 // place of a portable ContentID or confused with a Provider checksum.
 type ContentRequest struct {
-	ContentID        string
+	ContentID        ContentID
 	Size             int64
 	ExpectedRevision string
 }

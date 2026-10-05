@@ -77,7 +77,7 @@ func ReadBounded(ctx context.Context, r io.Reader, max int64) ([]byte, error) {
 // success it does not publish output. Host errors, cancellation, count or hash
 // failures require discarding that pending output; Working Tree bytes may not
 // substitute for a missing committed content object.
-func CopyVerifiedContent(ctx context.Context, dst io.Writer, src io.Reader, contentID string, size int64, limits Limits) error {
+func CopyVerifiedContent(ctx context.Context, dst io.Writer, src io.Reader, contentID ContentID, size int64, limits Limits) error {
 	if err := limits.Validate(); err != nil {
 		return err
 	}
@@ -90,13 +90,8 @@ func CopyVerifiedContent(ctx context.Context, dst io.Writer, src io.Reader, cont
 	if size > limits.MaxFileBytes || size > limits.MaxTotalBytes || size == math.MaxInt64 {
 		return protocolError(ReasonResourceLimit, "content exceeds byte policy")
 	}
-	if len(contentID) != 71 || contentID[:7] != "sha256:" {
-		return protocolError(ReasonInvalidSchema, "invalid ContentID")
-	}
-	for _, c := range contentID[7:] {
-		if !(c >= '0' && c <= '9' || c >= 'a' && c <= 'f') {
-			return protocolError(ReasonInvalidSchema, "invalid ContentID")
-		}
+	if err := contentID.Validate(); err != nil {
+		return err
 	}
 	if src == nil || dst == nil {
 		return fmt.Errorf("nil content stream")
@@ -109,7 +104,7 @@ func CopyVerifiedContent(ctx context.Context, dst io.Writer, src io.Reader, cont
 	if err := ctx.Err(); err != nil {
 		return err
 	}
-	if n != size || "sha256:"+hex.EncodeToString(hash.Sum(nil)) != contentID {
+	if n != size || ContentID("sha256:"+hex.EncodeToString(hash.Sum(nil))) != contentID {
 		return protocolError(ReasonObjectHashMismatch, "content bytes or size disagree")
 	}
 	return nil

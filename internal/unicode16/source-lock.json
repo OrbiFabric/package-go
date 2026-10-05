@@ -1,0 +1,10 @@
+{
+  "version": "16.0.0",
+  "source_base": "https://www.unicode.org/Public/16.0.0/ucd/",
+  "source_sha256": {
+    "UnicodeData.txt": "ff58e5823bd095166564a006e47d111130813dcf8bf234ef79fa51a870edb48f",
+    "DerivedNormalizationProps.txt": "4d4c03892dea9146d674b686e495df2d55a28d071ac474041d73518f887abddc",
+    "NormalizationTest.txt": "d811971453e7075e1ad56fb1b301eece5aa80757b81f6156e74a1bfb3ae5ceb1"
+  },
+  "tables_sha256": "b13bf970fcf489009b4ef9bd35a8796734149f92f243d00a894fdda1f946654f"
+}
