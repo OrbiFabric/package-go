@@ -44,14 +44,8 @@ func WriteZIP(ctx context.Context, source SnapshotSource, pending io.Writer, opt
 	if source == nil || pending == nil {
 		return out, schemaError("missing ZIP source/pending writer")
 	}
-	if err = ValidateComponent(options.DisplayDirectory); err != nil {
+	if err = validateZIPOptions(options); err != nil {
 		return out, err
-	}
-	if options.Method != zip.Store && options.Method != zip.Deflate {
-		return out, unsafeZIP("ZIP writer method unsupported")
-	}
-	if options.CompressionLevel < flate.HuffmanOnly || options.CompressionLevel > flate.BestCompression {
-		return out, unsafeZIP("ZIP writer compression level unsupported")
 	}
 	snapshot, err := source.BeginSnapshot(ctx)
 	if err != nil {
@@ -171,6 +165,19 @@ func WriteZIP(ctx context.Context, source SnapshotSource, pending io.Writer, opt
 		return out, err
 	}
 	return ZIPWriteResult{h.Root.Package.PackageID, h.Root.HEAD, ContentID("sha256:" + hex.EncodeToString(hash.Sum(nil))), counter.n}, nil
+}
+
+func validateZIPOptions(options ZIPOptions) error {
+	if err := ValidateComponent(options.DisplayDirectory); err != nil {
+		return err
+	}
+	if options.Method != zip.Store && options.Method != zip.Deflate {
+		return unsafeZIP("ZIP writer method unsupported")
+	}
+	if options.CompressionLevel < flate.HuffmanOnly || options.CompressionLevel > flate.BestCompression {
+		return unsafeZIP("ZIP writer compression level unsupported")
+	}
+	return nil
 }
 
 type zipArtifactWriter struct {

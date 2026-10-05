@@ -35,6 +35,10 @@ type ContentRequest struct {
 type ResolvedContent struct {
 	Reader   io.ReadCloser
 	Revision string
+	// CheckStable confirms the same Host-selected remote revision after reads
+	// and stream close. A nonempty ExpectedRevision requires this callback;
+	// revision/credentials remain transient and are never portable facts.
+	CheckStable func(context.Context) error
 }
 
 // ContentResolver is called only by an explicit hydration/export request, never
