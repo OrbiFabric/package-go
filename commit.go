@@ -41,7 +41,7 @@ type CommitRequest struct {
 	Label          *string
 	Tracking       map[string]UUID
 	// ReservedIDs are additional non-entry portable identities (memory/evidence).
-	// The SDK already reserves all historical Package/Version/file/folder IDs.
+	// The SDK already reserves historical entities and portable-memory IDs.
 	ReservedIDs   []UUID
 	VersionExtra  map[string]any
 	ManifestExtra map[string]any
@@ -130,6 +130,11 @@ func Commit(ctx context.Context, host CommitHost, request CommitRequest, l Limit
 	if err = CheckExpectedHEAD(request.ExpectedHEAD, history.Root.HEAD); err != nil {
 		return out, err
 	}
+	memory, err := readPortableMemory(ctx, tx, history, l)
+	if err != nil {
+		return out, err
+	}
+	request.ReservedIDs = append(append([]UUID{}, request.ReservedIDs...), memory.KnownIDs()...)
 	coverage, err := verifyCommittedContent(ctx, tx, history, l)
 	if err != nil {
 		return out, err
@@ -299,6 +304,9 @@ func prepareCommit(ctx context.Context, h History, scan WorkingScan, r CommitReq
 	ids := append(h.KnownIDs(), r.ReservedIDs...)
 	// Existing envelope/delivery IDs are already explicit in control paths.
 	for _, entry := range h.Root.Entries {
+		if !strings.HasPrefix(entry.Path, ".packtell/verification/") && !strings.HasPrefix(entry.Path, ".packtell/evidence/") {
+			continue
+		}
 		for _, part := range strings.Split(entry.Path, "/") {
 			part = strings.TrimSuffix(part, ".json")
 			if validUUID(part) {
