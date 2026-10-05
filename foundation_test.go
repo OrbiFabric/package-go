@@ -250,7 +250,7 @@ func TestVerifiedHostBytes(t *testing.T) {
 	} {
 		t.Run(c.name, func(t *testing.T) {
 			var pending bytes.Buffer
-			err := pkg.CopyVerifiedContent(context.Background(), &pending, bytes.NewReader(c.data), c.id, c.size, pkg.DefaultLimits())
+			err := pkg.CopyVerifiedContent(context.Background(), &pending, bytes.NewReader(c.data), pkg.ContentID(c.id), c.size, pkg.DefaultLimits())
 			if c.code != "" {
 				requireCode(t, err, c.code)
 			} else if err != nil || !bytes.Equal(pending.Bytes(), b) {
@@ -259,19 +259,19 @@ func TestVerifiedHostBytes(t *testing.T) {
 		})
 	}
 	empty := sha256.Sum256(nil)
-	if err := pkg.CopyVerifiedContent(context.Background(), io.Discard, strings.NewReader(""), "sha256:"+hex.EncodeToString(empty[:]), 0, pkg.DefaultLimits()); err != nil {
+	if err := pkg.CopyVerifiedContent(context.Background(), io.Discard, strings.NewReader(""), pkg.ContentID("sha256:"+hex.EncodeToString(empty[:])), 0, pkg.DefaultLimits()); err != nil {
 		t.Fatal(err)
 	}
 	l := pkg.DefaultLimits()
 	l.MaxFileBytes = 5
 	src := &countingReader{r: bytes.NewReader(b)}
-	requireCode(t, pkg.CopyVerifiedContent(context.Background(), io.Discard, src, id, 6, l), pkg.ReasonResourceLimit)
+	requireCode(t, pkg.CopyVerifiedContent(context.Background(), io.Discard, src, pkg.ContentID(id), 6, l), pkg.ReasonResourceLimit)
 	if src.calls != 0 {
 		t.Fatal("read before resource check")
 	}
 	ctx, cancel := context.WithCancel(context.Background())
 	cancel()
-	err := pkg.CopyVerifiedContent(ctx, io.Discard, bytes.NewReader(b), id, 6, pkg.DefaultLimits())
+	err := pkg.CopyVerifiedContent(ctx, io.Discard, bytes.NewReader(b), pkg.ContentID(id), 6, pkg.DefaultLimits())
 	if !errors.Is(err, context.Canceled) {
 		t.Fatal(err)
 	}
@@ -305,10 +305,10 @@ func TestPendingWriteFailureAndCancellation(t *testing.T) {
 	h := sha256.Sum256(b)
 	id := "sha256:" + hex.EncodeToString(h[:])
 	ctx, cancel := context.WithCancel(context.Background())
-	if err := pkg.CopyVerifiedContent(ctx, cancelWriter{cancel}, bytes.NewReader(b), id, 6, pkg.DefaultLimits()); !errors.Is(err, context.Canceled) {
+	if err := pkg.CopyVerifiedContent(ctx, cancelWriter{cancel}, bytes.NewReader(b), pkg.ContentID(id), 6, pkg.DefaultLimits()); !errors.Is(err, context.Canceled) {
 		t.Fatalf("final write cancellation: %v", err)
 	}
-	if err := pkg.CopyVerifiedContent(context.Background(), failWriter{}, bytes.NewReader(b), id, 6, pkg.DefaultLimits()); !errors.Is(err, io.ErrClosedPipe) {
+	if err := pkg.CopyVerifiedContent(context.Background(), failWriter{}, bytes.NewReader(b), pkg.ContentID(id), 6, pkg.DefaultLimits()); !errors.Is(err, io.ErrClosedPipe) {
 		t.Fatalf("write error: %v", err)
 	}
 	l := pkg.DefaultLimits()
