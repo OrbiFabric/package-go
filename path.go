@@ -67,6 +67,12 @@ func ValidateComponent(name string) error {
 // opening any stream. Returned paths have no trailing slash and are sorted.
 // NFC collisions precede full-fold collisions and individual name rejection.
 func PreflightTree(ctx context.Context, entries []TreeEntry, l Limits) ([]TreeEntry, error) {
+	return preflightTree(ctx, entries, l, true)
+}
+
+// Archive wrappers are outside Package Root. Their display names do not own
+// the reserved control namespace; the stripped logical Root still does.
+func preflightTree(ctx context.Context, entries []TreeEntry, l Limits, reserveRootControl bool) ([]TreeEntry, error) {
 	if err := l.Validate(); err != nil {
 		return nil, err
 	}
@@ -165,7 +171,7 @@ func PreflightTree(ctx context.Context, entries []TreeEntry, l Limits) ([]TreeEn
 				return nil, err
 			}
 		}
-		if parts[0] != ".packtell" && PathCollisionKey(parts[0]) == ".packtell" {
+		if reserveRootControl && parts[0] != ".packtell" && PathCollisionKey(parts[0]) == ".packtell" {
 			return nil, protocolError(ReasonCaseConflict, "reserved Root control alias")
 		}
 		e := nodes[p]
