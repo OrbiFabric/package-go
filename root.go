@@ -13,13 +13,15 @@ import (
 var ErrUnstableWorkingTree = errors.New("working tree changed during stable scan")
 
 type RootInspection struct {
-	Recognition  Recognition
-	Format       Format
-	Package      Package
-	HEAD         HEAD
-	Entries      []TreeEntry
-	HeadVersion  *Version
-	HeadManifest *Manifest
+	Recognition      Recognition
+	Format           Format
+	Package          Package
+	HEAD             HEAD
+	Entries          []TreeEntry
+	HeadVersion      *Version
+	HeadManifest     *Manifest
+	evidenceObserved bool
+	evidencePresent  bool
 }
 
 // ReadRoot inspects only the caller-designated Root. No recursive discovery,
@@ -42,6 +44,10 @@ func ReadRoot(ctx context.Context, source TreeReader, l Limits, support Capabili
 	if err != nil {
 		return out, err
 	}
+	out.evidenceObserved = true
+	for _, e := range raw {
+		out.evidencePresent = out.evidencePresent || strings.HasPrefix(e.Path, ".packtell/evidence/") && e.Kind != "directory"
+	}
 	entries, preflightErr := PreflightTree(ctx, raw, l)
 	// Compute safety first. Only the exact known-safe control marker may be read
 	// to label recognition; no unsafe or payload path is ever opened on failure.
@@ -57,6 +63,10 @@ func ReadRoot(ctx context.Context, source TreeReader, l Limits, support Capabili
 		}
 	}
 	if preflightErr != nil {
+		var policy *ProtocolError
+		if errors.As(preflightErr, &policy) && policy.Code == ReasonResourceLimit {
+			return out, preflightErr
+		}
 		if marker && safeControl {
 			if r, e := source.Open(ctx, ".packtell/format.json"); e == nil && r != nil {
 				_, out.Recognition, _ = ReadFormat(ctx, r, l, support)

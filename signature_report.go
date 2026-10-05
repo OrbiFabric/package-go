@@ -61,6 +61,19 @@ func verifySignatures(ctx context.Context, source TreeReader, h History, l Limit
 	for _, e := range h.Root.Entries {
 		nodes[e.Path] = e
 	}
+	if !containsText(support.Capabilities, CapabilityVersionSignature) {
+		for _, e := range h.Root.Entries {
+			if e.Kind == "file" && strings.HasPrefix(e.Path, ".packtell/verification/versions/") {
+				parts := strings.Split(e.Path, "/")
+				out.Items = append(out.Items, SignatureItem{Path: e.Path, SignatureID: SignatureID(strings.TrimSuffix(parts[4], ".json")), VersionID: VersionID(parts[3]), State: SignatureNotChecked, Identity: IdentityUnknown, ReasonCodes: []ReasonCode{}})
+			}
+		}
+		if len(out.Items) == 0 {
+			out.State = SignatureAbsent
+			out.ReasonCodes = []ReasonCode{ReasonOK}
+		}
+		return out, nil
+	}
 	addReason := func(code ReasonCode) {
 		if !containsReason(out.ReasonCodes, code) {
 			out.ReasonCodes = append(out.ReasonCodes, code)

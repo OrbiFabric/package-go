@@ -1,0 +1,658 @@
+{
+  "report_type": "SDK verifier development evidence; not protocol authority or seven-level certification",
+  "spec_commit": "7ff166365dc83cee783e4e6715225968c81ef7b9",
+  "development_parent_commit": "63faf6deff74d386b0764bdf78891d943ea79dbc",
+  "implementation_commit": "See enclosing reviewed Git commit and Issue #21; producer NOT_YET_FROZEN",
+  "comparison_rule": "Match each frozen dimension except expected NOT_CHECKED; include every expected reason. PASS here means expected behavior, including rejection, never semantic success of an INVALID/NOT_FULL/NOT_CHECKED dimension.",
+  "resource_policy": {
+    "entries": 10000,
+    "path_bytes": 4096,
+    "tree_depth": 256,
+    "single_file_bytes": 16777216,
+    "total_bytes": 67108864,
+    "json_bytes": 1048576,
+    "total_json_bytes": 67108864,
+    "json_depth": 64,
+    "ndjson_line_bytes": 1048576,
+    "compression_ratio": 1000
+  },
+  "trust_policy": "No embedded key trusted; no network or Resolver.",
+  "cases": [
+    {
+      "id": "minimal-valid",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/minimal-valid.json",
+      "frozen_asset_digest": "sha256:875f532fe6551f7903936f9fd732be4948fcdeb8071c3838ae60ef425c2e2f4e",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "CLEAN",
+        "committed_integrity": "VALID",
+        "history_completeness": "FULL",
+        "signature": "ABSENT",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "OK"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "unborn",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/unborn.json",
+      "frozen_asset_digest": "sha256:9113450d66d84cd96ca6cd29e3df08cf15edba6107655d5969f897577f025c4a",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "UNBORN",
+        "committed_integrity": "VALID",
+        "history_completeness": "FULL",
+        "signature": "ABSENT",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "OK"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "complete-history",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/complete-history.json",
+      "frozen_asset_digest": "sha256:86d49a450845e5892396370e33ac24e5a65df85e76163509d605a1a02998b748",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "CLEAN",
+        "committed_integrity": "VALID",
+        "history_completeness": "FULL",
+        "signature": "ABSENT",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "OK"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "modified-file",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/modified-file.json",
+      "frozen_asset_digest": "sha256:1d5416964b619521cd06700f4fdc6aa2b20af6503ae991f189460456ff54ca35",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "CLEAN",
+        "committed_integrity": "VALID",
+        "history_completeness": "FULL",
+        "signature": "ABSENT",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "OK"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "dirty-working-tree",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/dirty-working-tree.json",
+      "frozen_asset_digest": "sha256:4f7d295c586c75223087d0fb172f60c77e2525a77826dfe3d245bc1c27d5a745",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "DIRTY",
+        "committed_integrity": "VALID",
+        "history_completeness": "FULL",
+        "signature": "ABSENT",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "OK"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "renamed-file",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/renamed-file.json",
+      "frozen_asset_digest": "sha256:9dd49f880bd874bf4c276eaa180eacbb3f51f11e695fc315edc46e6bfe4530bd",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "CLEAN",
+        "committed_integrity": "VALID",
+        "history_completeness": "FULL",
+        "signature": "ABSENT",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "OK"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "moved-file",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/moved-file.json",
+      "frozen_asset_digest": "sha256:f006186a9d3e65271eebe3536ebdd71072b27409b72459305ed0c107b4f201f4",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "CLEAN",
+        "committed_integrity": "VALID",
+        "history_completeness": "FULL",
+        "signature": "ABSENT",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "OK"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "missing-object",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/missing-object.json",
+      "frozen_asset_digest": "sha256:0e1d731828bb9400254532b1aff2605572fb34098160177bf7f6a566ceef7a2f",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "CLEAN",
+        "committed_integrity": "UNAVAILABLE",
+        "history_completeness": "NOT_FULL",
+        "signature": "ABSENT",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "MISSING_OBJECT"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "object-hash-mismatch",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/object-hash-mismatch.json",
+      "frozen_asset_digest": "sha256:e9b4aa457702058af0fc47dd7e34e61a79f1f54943bbdc474120f42ef38a5747",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "CLEAN",
+        "committed_integrity": "INVALID",
+        "history_completeness": "INVALID",
+        "signature": "ABSENT",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "OBJECT_HASH_MISMATCH"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "unknown-optional-extension",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/unknown-optional-extension.json",
+      "frozen_asset_digest": "sha256:5e364565b9f22eebc316b8ba55c7eba3fc16acc080153a7d311deca9d20b21da",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "CLEAN",
+        "committed_integrity": "VALID",
+        "history_completeness": "FULL",
+        "signature": "ABSENT",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "OK"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "unknown-required-capability",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/unknown-required-capability.json",
+      "frozen_asset_digest": "sha256:c5012f2088ab905c56b66316e5529fff9bbfb9cc90fca79fd9c052f80f9c5d89",
+      "actual": {
+        "recognition": "UNSUPPORTED",
+        "structure": "NOT_CHECKED",
+        "working_state": "NOT_CHECKED",
+        "committed_integrity": "NOT_CHECKED",
+        "history_completeness": "NOT_CHECKED",
+        "signature": "NOT_CHECKED",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "UNKNOWN_REQUIRED_CAPABILITY"
+        ]
+      },
+      "operation_error": "UNKNOWN_REQUIRED_CAPABILITY: unsupported required capability",
+      "comparison": "PASS"
+    },
+    {
+      "id": "valid-signature",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/valid-signature.json",
+      "frozen_asset_digest": "sha256:3e25eb5893f45a50afa015a0e59b8b0982f998a94491cf965cf5556baa3f1515",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "CLEAN",
+        "committed_integrity": "VALID",
+        "history_completeness": "FULL",
+        "signature": "VALID",
+        "identity": "UNTRUSTED",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "OK"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "bad-signature",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/bad-signature.json",
+      "frozen_asset_digest": "sha256:aeea0f6a2317493de1cc56f7814ddca7b28a18a244f9566ba350ed4f4eb05eff",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "CLEAN",
+        "committed_integrity": "VALID",
+        "history_completeness": "FULL",
+        "signature": "INVALID",
+        "identity": "UNTRUSTED",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "BAD_SIGNATURE"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "path-traversal",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/path-traversal.json",
+      "frozen_asset_digest": "sha256:64373f8597650dafbbf042f65c548d82f8246b3aef6e5730a72697f86bfc1230",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "INVALID",
+        "working_state": "UNREADABLE",
+        "committed_integrity": "NOT_CHECKED",
+        "history_completeness": "INVALID",
+        "signature": "NOT_CHECKED",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "PATH_TRAVERSAL"
+        ]
+      },
+      "operation_error": "PATH_TRAVERSAL: empty/traversal path component",
+      "comparison": "PASS"
+    },
+    {
+      "id": "case-conflict",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/case-conflict.json",
+      "frozen_asset_digest": "sha256:8031f5f2f5b26b7b508708cb6491477a5dd8082f8842db711d390e97c335617d",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "INVALID",
+        "working_state": "UNREADABLE",
+        "committed_integrity": "NOT_CHECKED",
+        "history_completeness": "INVALID",
+        "signature": "NOT_CHECKED",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "CASE_CONFLICT"
+        ]
+      },
+      "operation_error": "CASE_CONFLICT: tree full-fold collision",
+      "comparison": "PASS"
+    },
+    {
+      "id": "unicode-normalization-conflict",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/unicode-normalization-conflict.json",
+      "frozen_asset_digest": "sha256:995b835fc0f5ed0555f565c78b47d97cc793af82be95f62a96521f88a4b911a9",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "INVALID",
+        "working_state": "UNREADABLE",
+        "committed_integrity": "NOT_CHECKED",
+        "history_completeness": "INVALID",
+        "signature": "NOT_CHECKED",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "UNICODE_NORMALIZATION_CONFLICT"
+        ]
+      },
+      "operation_error": "UNICODE_NORMALIZATION_CONFLICT: tree NFC collision",
+      "comparison": "PASS"
+    },
+    {
+      "id": "cloud-origin-provenance",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/cloud-origin-provenance.json",
+      "frozen_asset_digest": "sha256:b5f8e57a27752d5eeb952921fc27d1a02dbce018667f1cef133bce11f6457642",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "CLEAN",
+        "committed_integrity": "VALID",
+        "history_completeness": "FULL",
+        "signature": "ABSENT",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "OK"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "multi-delivery",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/multi-delivery.json",
+      "frozen_asset_digest": "sha256:a59e578df457e54bebd62e990ae998745f75719c6cdbca20548348fb95783e6f",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "CLEAN",
+        "committed_integrity": "VALID",
+        "history_completeness": "FULL",
+        "signature": "VALID",
+        "identity": "UNTRUSTED",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "OK"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "later-evidence-append",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/later-evidence-append.json",
+      "frozen_asset_digest": "sha256:2c040d4b17435847d72cd4a2f78d5b2a22ef5f27314c8308829825ab9ba8187d",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "CLEAN",
+        "committed_integrity": "VALID",
+        "history_completeness": "FULL",
+        "signature": "VALID",
+        "identity": "UNTRUSTED",
+        "evidence": "VALID",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "OK"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "cycle",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/cycle.json",
+      "frozen_asset_digest": "sha256:4fc3015587e91cddd7669f7ee23f7e769ed2e5e7d24bf5ff06d333c0f9323629",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "INVALID",
+        "working_state": "NOT_CHECKED",
+        "committed_integrity": "NOT_CHECKED",
+        "history_completeness": "INVALID",
+        "signature": "NOT_CHECKED",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "NON_LINEAR_HISTORY"
+        ]
+      },
+      "operation_error": "NON_LINEAR_HISTORY: ordinal does not continue parent",
+      "comparison": "PASS"
+    },
+    {
+      "id": "missing-parent",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/missing-parent.json",
+      "frozen_asset_digest": "sha256:215f5a1ebbaee80248a7e2a177eac2ce2381b9874ef0793f687c8244356bdac7",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "INVALID",
+        "working_state": "NOT_CHECKED",
+        "committed_integrity": "NOT_CHECKED",
+        "history_completeness": "INVALID",
+        "signature": "NOT_CHECKED",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "MISSING_PARENT"
+        ]
+      },
+      "operation_error": "MISSING_PARENT: committed parent is absent",
+      "comparison": "PASS"
+    },
+    {
+      "id": "multiple-roots",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/multiple-roots.json",
+      "frozen_asset_digest": "sha256:ca7972ba2b76ccbf77461dbba3691d267bdecaa9120fe58841ebd4169a2ac0b2",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "INVALID",
+        "working_state": "NOT_CHECKED",
+        "committed_integrity": "NOT_CHECKED",
+        "history_completeness": "INVALID",
+        "signature": "NOT_CHECKED",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "NON_LINEAR_HISTORY"
+        ]
+      },
+      "operation_error": "NON_LINEAR_HISTORY: HEAD chain leaves detached or multiple-root Versions",
+      "comparison": "PASS"
+    },
+    {
+      "id": "detached-version",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/detached-version.json",
+      "frozen_asset_digest": "sha256:5bc7b18fbe1e1f9cad4fc2fd241316852784f0df3459095e2b8365ce7812e34f",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "INVALID",
+        "working_state": "NOT_CHECKED",
+        "committed_integrity": "NOT_CHECKED",
+        "history_completeness": "INVALID",
+        "signature": "NOT_CHECKED",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "NON_LINEAR_HISTORY"
+        ]
+      },
+      "operation_error": "NON_LINEAR_HISTORY: HEAD chain leaves detached or multiple-root Versions",
+      "comparison": "PASS"
+    },
+    {
+      "id": "multiple-parents",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/multiple-parents.json",
+      "frozen_asset_digest": "sha256:5c718fcf7b9425e106db4d5a6e563a76976bd4d319368550f70de7729e45a45e",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "INVALID",
+        "working_state": "NOT_CHECKED",
+        "committed_integrity": "NOT_CHECKED",
+        "history_completeness": "INVALID",
+        "signature": "NOT_CHECKED",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "INVALID_SCHEMA"
+        ]
+      },
+      "operation_error": "INVALID_SCHEMA: invalid nullable ID",
+      "comparison": "PASS"
+    },
+    {
+      "id": "invalid-head-crlf",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/invalid-head-crlf.json",
+      "frozen_asset_digest": "sha256:03466f618b62b7bcebe1a1801e4fbd4a7c7492b4573853fb000f0547b75c2171",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "INVALID",
+        "working_state": "NOT_CHECKED",
+        "committed_integrity": "NOT_CHECKED",
+        "history_completeness": "INVALID",
+        "signature": "NOT_CHECKED",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "INVALID_HEAD"
+        ]
+      },
+      "operation_error": "INVALID_HEAD: HEAD length is not canonical",
+      "comparison": "PASS"
+    },
+    {
+      "id": "zip-wrapped",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/zip-wrapped.json",
+      "frozen_asset_digest": "sha256:ed549a2229fa239b94e47473cd1417a1bb7b6aa0a1247c78eac507653c142fcc",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "CLEAN",
+        "committed_integrity": "VALID",
+        "history_completeness": "FULL",
+        "signature": "ABSENT",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "OK"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "zip-unwrapped",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/zip-unwrapped.json",
+      "frozen_asset_digest": "sha256:c204438522039d2e6f4d878128a438a1725211c34d29e39c78d44404065f458d",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "CLEAN",
+        "committed_integrity": "VALID",
+        "history_completeness": "FULL",
+        "signature": "ABSENT",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "OK"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    },
+    {
+      "id": "zip-traversal",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/zip-traversal.json",
+      "frozen_asset_digest": "sha256:81c63828df00f1354b8595d289d55757b6c8310088004eea263c04125b966c7c",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "INVALID",
+        "working_state": "NOT_CHECKED",
+        "committed_integrity": "NOT_CHECKED",
+        "history_completeness": "INVALID",
+        "signature": "NOT_CHECKED",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "PATH_TRAVERSAL"
+        ]
+      },
+      "operation_error": "PATH_TRAVERSAL: empty/traversal path component",
+      "comparison": "PASS"
+    },
+    {
+      "id": "zip-duplicate",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/zip-duplicate.json",
+      "frozen_asset_digest": "sha256:d1012cc18be6cc07f71d66f206e2fa7bf797270347673186391e844a27156499",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "INVALID",
+        "working_state": "NOT_CHECKED",
+        "committed_integrity": "NOT_CHECKED",
+        "history_completeness": "INVALID",
+        "signature": "NOT_CHECKED",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "UNSAFE_ARCHIVE"
+        ]
+      },
+      "operation_error": "UNSAFE_ARCHIVE: duplicate ZIP path",
+      "comparison": "PASS"
+    },
+    {
+      "id": "core-minimal",
+      "expected_source": "https://github.com/OrbiFabric/package-spec/blob/7ff166365dc83cee783e4e6715225968c81ef7b9/fixtures/core-minimal.json",
+      "frozen_asset_digest": "sha256:f3a5ae30c7bd2d09f93d2b649816100275a35165ec88bcae3e46ca7f48621182",
+      "actual": {
+        "recognition": "RECOGNIZED",
+        "structure": "VALID",
+        "working_state": "CLEAN",
+        "committed_integrity": "VALID",
+        "history_completeness": "NOT_CHECKED",
+        "signature": "ABSENT",
+        "identity": "UNKNOWN",
+        "evidence": "ABSENT",
+        "online": "NOT_REQUESTED",
+        "reason_codes": [
+          "OK"
+        ]
+      },
+      "operation_error": null,
+      "comparison": "PASS"
+    }
+  ],
+  "formal_seven_level_gate": "PENDING — reader/writer/Directory/ZIP operation matrices and producer freeze not certified",
+  "native_platforms": {
+    "linux": "Runtime safety covered by full existing stage suites plus verifier cases",
+    "windows_amd64": "Compile only; native runtime NOT_RUN",
+    "darwin_arm64": "Compile only; native runtime NOT_RUN"
+  }
+}

@@ -81,9 +81,24 @@ func verifyEvidence(ctx context.Context, source TreeReader, h History, memory Po
 	for _, e := range memory.Events {
 		events[e.EventID] = e
 	}
+	present := false
+	for _, e := range h.Root.Entries {
+		present = present || e.Kind == "file" && strings.HasPrefix(e.Path, ".packtell/evidence/")
+	}
+	if !present {
+		out.State = EvidenceAbsent
+		out.ReasonCodes = []ReasonCode{ReasonOK}
+		return out, nil
+	}
+	if !containsText(support.Capabilities, CapabilityDeliveryEvidence) {
+		return out, nil
+	}
 	signatures, err := verifySignatures(ctx, source, h, l, support, nil)
 	if err != nil {
 		return out, err
+	}
+	if signatures.State == SignatureNotChecked {
+		return out, nil
 	}
 	signatureItems := map[SignatureID]SignatureItem{}
 	for _, s := range signatures.Items {
