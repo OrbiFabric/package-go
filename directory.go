@@ -178,6 +178,9 @@ func validateDirectoryTree(ctx context.Context, source TreeReader, l Limits, sup
 	if err != nil {
 		return History{}, err
 	}
+	if err = validateAttestationDeclarations(ctx, source, h, l, support); err != nil {
+		return History{}, err
+	}
 	memory, err := readPortableMemory(ctx, source, h, l)
 	if err != nil {
 		return History{}, err
