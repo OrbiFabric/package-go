@@ -1,0 +1,71 @@
+{
+  "schema": "orbifabric.package.fixture.v1",
+  "id": "unborn",
+  "input": {
+    "kind": "tree",
+    "entries": [
+      {
+        "path": ".packtell/HEAD",
+        "kind": "file",
+        "bytes_base64": "dW5ib3JuCg=="
+      },
+      {
+        "path": ".packtell/format.json",
+        "kind": "file",
+        "bytes_base64": "eyJleHRlbnNpb25zIjpbXSwib3B0aW9uYWxfY2FwYWJpbGl0aWVzIjpbIm9yYmlmYWJyaWMucGFja2FnZS5jYXBhYmlsaXR5LmRlbGl2ZXJ5LWV2aWRlbmNlLnYxIiwib3JiaWZhYnJpYy5wYWNrYWdlLmNhcGFiaWxpdHkudmVyc2lvbi1zaWduYXR1cmUudjEiXSwicHJvZmlsZXMiOlsib3JiaWZhYnJpYy5wYWNrYWdlLnByb2ZpbGUuY29tcGxldGUudjEiXSwicHJvdG9jb2wiOiJvcmJpZmFicmljLnBhY2thZ2UiLCJwcm90b2NvbF92ZXJzaW9uIjoiMi4wIiwicmVxdWlyZWRfY2FwYWJpbGl0aWVzIjpbIm9yYmlmYWJyaWMucGFja2FnZS5jYXBhYmlsaXR5LmNvbnRlbnQtc2hhMjU2LnYxIiwib3JiaWZhYnJpYy5wYWNrYWdlLmNhcGFiaWxpdHkubGluZWFyLWhpc3RvcnkudjEiLCJvcmJpZmFicmljLnBhY2thZ2UuY2FwYWJpbGl0eS5wb3J0YWJsZS1tZW1vcnkudjEiXSwic2NoZW1hIjoib3JiaWZhYnJpYy5wYWNrYWdlLmZvcm1hdC52MiIsInRyZWVfcHJvZmlsZSI6Im9yYmlmYWJyaWMucGFja2FnZS10cmVlLnYxIn0="
+      },
+      {
+        "path": ".packtell/history/events.ndjson",
+        "kind": "file",
+        "bytes_base64": ""
+      },
+      {
+        "path": ".packtell/metadata/notes.json",
+        "kind": "file",
+        "bytes_base64": "eyJwYWNrYWdlX2lkIjoiMDE5YTAwMDAtMDAwMC03MDAwLTgwMDAtMDAwMDAwMDAwMDAxIiwicmV2aXNpb25zIjpbXSwic2NoZW1hIjoib3JiaWZhYnJpYy5wYWNrYWdlLm5vdGVzLnYxIn0="
+      },
+      {
+        "path": ".packtell/metadata/package.json",
+        "kind": "file",
+        "bytes_base64": "eyJwYWNrYWdlX2lkIjoiMDE5YTAwMDAtMDAwMC03MDAwLTgwMDAtMDAwMDAwMDAwMDAxIiwic2NoZW1hIjoib3JiaWZhYnJpYy5wYWNrYWdlLm1ldGFkYXRhLnYxIiwidGl0bGUiOiJGaXh0dXJlIn0="
+      },
+      {
+        "path": ".packtell/metadata/provenance.json",
+        "kind": "file",
+        "bytes_base64": "eyJwYWNrYWdlX2lkIjoiMDE5YTAwMDAtMDAwMC03MDAwLTgwMDAtMDAwMDAwMDAwMDAxIiwicmVjb3JkcyI6W10sInNjaGVtYSI6Im9yYmlmYWJyaWMucGFja2FnZS5wcm92ZW5hbmNlLnYxIn0="
+      },
+      {
+        "path": ".packtell/metadata/tags.json",
+        "kind": "file",
+        "bytes_base64": "eyJwYWNrYWdlX2lkIjoiMDE5YTAwMDAtMDAwMC03MDAwLTgwMDAtMDAwMDAwMDAwMDAxIiwicmV2aXNpb25zIjpbXSwic2NoZW1hIjoib3JiaWZhYnJpYy5wYWNrYWdlLnRhZ3MudjEifQ=="
+      },
+      {
+        "path": ".packtell/objects/sha256/",
+        "kind": "directory"
+      },
+      {
+        "path": ".packtell/package.json",
+        "kind": "file",
+        "bytes_base64": "eyJjcmVhdGVkX2F0IjoiMjAyNi0xMC0wNVQwMDowMDowMC4wMDAwMDBaIiwicGFja2FnZV9pZCI6IjAxOWEwMDAwLTAwMDAtNzAwMC04MDAwLTAwMDAwMDAwMDAwMSIsInNjaGVtYSI6Im9yYmlmYWJyaWMucGFja2FnZS5wYWNrYWdlLnYyIn0="
+      },
+      {
+        "path": ".packtell/versions/",
+        "kind": "directory"
+      }
+    ]
+  },
+  "expected": {
+    "recognition": "RECOGNIZED",
+    "structure": "VALID",
+    "working_state": "UNBORN",
+    "committed_integrity": "VALID",
+    "history_completeness": "FULL",
+    "signature": "ABSENT",
+    "identity": "UNKNOWN",
+    "evidence": "ABSENT",
+    "online": "NOT_REQUESTED",
+    "reason_codes": [
+      "OK"
+    ]
+  }
+}

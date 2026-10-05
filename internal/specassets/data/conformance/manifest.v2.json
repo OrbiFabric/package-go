@@ -1,0 +1,390 @@
+{
+  "schema": "orbifabric.package.conformance.v2",
+  "levels": [
+    "Core Reader",
+    "Core Writer",
+    "Complete Reader",
+    "Complete Writer",
+    "Verifier",
+    "Directory Codec",
+    "ZIP Codec"
+  ],
+  "fixtures": [
+    {
+      "id": "minimal-valid",
+      "path": "../fixtures/minimal-valid.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:875f532fe6551f7903936f9fd732be4948fcdeb8071c3838ae60ef425c2e2f4e"
+    },
+    {
+      "id": "unborn",
+      "path": "../fixtures/unborn.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:9113450d66d84cd96ca6cd29e3df08cf15edba6107655d5969f897577f025c4a"
+    },
+    {
+      "id": "complete-history",
+      "path": "../fixtures/complete-history.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:86d49a450845e5892396370e33ac24e5a65df85e76163509d605a1a02998b748"
+    },
+    {
+      "id": "modified-file",
+      "path": "../fixtures/modified-file.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:1d5416964b619521cd06700f4fdc6aa2b20af6503ae991f189460456ff54ca35"
+    },
+    {
+      "id": "dirty-working-tree",
+      "path": "../fixtures/dirty-working-tree.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:4f7d295c586c75223087d0fb172f60c77e2525a77826dfe3d245bc1c27d5a745"
+    },
+    {
+      "id": "renamed-file",
+      "path": "../fixtures/renamed-file.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:9dd49f880bd874bf4c276eaa180eacbb3f51f11e695fc315edc46e6bfe4530bd"
+    },
+    {
+      "id": "moved-file",
+      "path": "../fixtures/moved-file.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:f006186a9d3e65271eebe3536ebdd71072b27409b72459305ed0c107b4f201f4"
+    },
+    {
+      "id": "missing-object",
+      "path": "../fixtures/missing-object.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:0e1d731828bb9400254532b1aff2605572fb34098160177bf7f6a566ceef7a2f"
+    },
+    {
+      "id": "object-hash-mismatch",
+      "path": "../fixtures/object-hash-mismatch.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:e9b4aa457702058af0fc47dd7e34e61a79f1f54943bbdc474120f42ef38a5747"
+    },
+    {
+      "id": "unknown-optional-extension",
+      "path": "../fixtures/unknown-optional-extension.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:5e364565b9f22eebc316b8ba55c7eba3fc16acc080153a7d311deca9d20b21da"
+    },
+    {
+      "id": "unknown-required-capability",
+      "path": "../fixtures/unknown-required-capability.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:c5012f2088ab905c56b66316e5529fff9bbfb9cc90fca79fd9c052f80f9c5d89"
+    },
+    {
+      "id": "valid-signature",
+      "path": "../fixtures/valid-signature.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:3e25eb5893f45a50afa015a0e59b8b0982f998a94491cf965cf5556baa3f1515"
+    },
+    {
+      "id": "bad-signature",
+      "path": "../fixtures/bad-signature.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:aeea0f6a2317493de1cc56f7814ddca7b28a18a244f9566ba350ed4f4eb05eff"
+    },
+    {
+      "id": "path-traversal",
+      "path": "../fixtures/path-traversal.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:64373f8597650dafbbf042f65c548d82f8246b3aef6e5730a72697f86bfc1230"
+    },
+    {
+      "id": "case-conflict",
+      "path": "../fixtures/case-conflict.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:8031f5f2f5b26b7b508708cb6491477a5dd8082f8842db711d390e97c335617d"
+    },
+    {
+      "id": "unicode-normalization-conflict",
+      "path": "../fixtures/unicode-normalization-conflict.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:995b835fc0f5ed0555f565c78b47d97cc793af82be95f62a96521f88a4b911a9"
+    },
+    {
+      "id": "cloud-origin-provenance",
+      "path": "../fixtures/cloud-origin-provenance.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:b5f8e57a27752d5eeb952921fc27d1a02dbce018667f1cef133bce11f6457642"
+    },
+    {
+      "id": "multi-delivery",
+      "path": "../fixtures/multi-delivery.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:a59e578df457e54bebd62e990ae998745f75719c6cdbca20548348fb95783e6f"
+    },
+    {
+      "id": "later-evidence-append",
+      "path": "../fixtures/later-evidence-append.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:2c040d4b17435847d72cd4a2f78d5b2a22ef5f27314c8308829825ab9ba8187d"
+    },
+    {
+      "id": "cycle",
+      "path": "../fixtures/cycle.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:4fc3015587e91cddd7669f7ee23f7e769ed2e5e7d24bf5ff06d333c0f9323629"
+    },
+    {
+      "id": "missing-parent",
+      "path": "../fixtures/missing-parent.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:215f5a1ebbaee80248a7e2a177eac2ce2381b9874ef0793f687c8244356bdac7"
+    },
+    {
+      "id": "multiple-roots",
+      "path": "../fixtures/multiple-roots.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:ca7972ba2b76ccbf77461dbba3691d267bdecaa9120fe58841ebd4169a2ac0b2"
+    },
+    {
+      "id": "detached-version",
+      "path": "../fixtures/detached-version.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:5bc7b18fbe1e1f9cad4fc2fd241316852784f0df3459095e2b8365ce7812e34f"
+    },
+    {
+      "id": "multiple-parents",
+      "path": "../fixtures/multiple-parents.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:5c718fcf7b9425e106db4d5a6e563a76976bd4d319368550f70de7729e45a45e"
+    },
+    {
+      "id": "invalid-head-crlf",
+      "path": "../fixtures/invalid-head-crlf.json",
+      "levels": [
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:03466f618b62b7bcebe1a1801e4fbd4a7c7492b4573853fb000f0547b75c2171"
+    },
+    {
+      "id": "zip-wrapped",
+      "path": "../fixtures/zip-wrapped.json",
+      "levels": [
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:ed549a2229fa239b94e47473cd1417a1bb7b6aa0a1247c78eac507653c142fcc"
+    },
+    {
+      "id": "zip-unwrapped",
+      "path": "../fixtures/zip-unwrapped.json",
+      "levels": [
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:c204438522039d2e6f4d878128a438a1725211c34d29e39c78d44404065f458d"
+    },
+    {
+      "id": "zip-traversal",
+      "path": "../fixtures/zip-traversal.json",
+      "levels": [
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:81c63828df00f1354b8595d289d55757b6c8310088004eea263c04125b966c7c"
+    },
+    {
+      "id": "zip-duplicate",
+      "path": "../fixtures/zip-duplicate.json",
+      "levels": [
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:d1012cc18be6cc07f71d66f206e2fa7bf797270347673186391e844a27156499"
+    },
+    {
+      "id": "core-minimal",
+      "path": "../fixtures/core-minimal.json",
+      "levels": [
+        "Core Reader",
+        "Core Writer",
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:f3a5ae30c7bd2d09f93d2b649816100275a35165ec88bcae3e46ca7f48621182"
+    }
+  ],
+  "vectors": [
+    "../vectors/crypto.v2.json"
+  ],
+  "writer_operations": [
+    {
+      "id": "stale-head",
+      "expected_head": "019a0000-0000-7000-8000-000000000002",
+      "actual_head": "019a0000-0000-7000-8000-000000000005",
+      "expected_reason": "STALE_HEAD",
+      "published_versions": 0
+    },
+    {
+      "id": "linear-commit",
+      "parent": "019a0000-0000-7000-8000-000000000002",
+      "ordinal": 2,
+      "expected_parent": "019a0000-0000-7000-8000-000000000002",
+      "expected_ordinal": 2
+    }
+  ],
+  "writer_contract": "Read valid tree; lossless Directory and wrapped ZIP round-trip; compare logical manifests/subjects and opaque extension bytes, not ZIP bytes. Negative fixtures must reject before publishing output. stale-head must publish nothing.",
+  "resource_policy": {
+    "entries": 10000,
+    "single_file_bytes": 16777216,
+    "total_bytes": 67108864,
+    "json_depth": 64,
+    "json_bytes": 1048576,
+    "ndjson_line_bytes": 1048576,
+    "compression_ratio": 1000
+  },
+  "trust_policy": "No embedded key is trusted; test public keys are cryptographically valid but UNTRUSTED. No network."
+}

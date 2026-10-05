@@ -69,7 +69,7 @@ Package 1.x 是未发布开发协议。`package-go` **不实现 1.x reader、wri
 
 ## Status
 
-**Bootstrap / implementation pending.** 当前仓库先冻结职责与依赖边界，具体 API 将随 Package 2.0 normative fields 和 conformance fixtures 一起实现。
+**SDK foundation 已实现；API 暂未冻结。** 模块提供受限 JSON 输入、format/capability 识别、独立结果维度、显式可取消 Host ports 及内容流 hash/size 校验。规范锁定 `7ff166365dc83cee783e4e6715225968c81ef7b9`；机器资产原样嵌入供离线一致性开发使用。完整 tree/history/signing/codec 和七级 conformance 尚未实现或认证。参见 [foundation contract](docs/foundation.md)。
 
 ## License
 

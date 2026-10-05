@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://orbifabric.org/package/schemas/evidence-envelope.v1.schema.json",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "orbifabric.package.evidence-envelope.v1"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "cloud_anchor",
+        "package_witness",
+        "delivery_receipt",
+        "lifecycle_witness"
+      ]
+    },
+    "subject": {
+      "oneOf": [
+        {
+          "$ref": "https://orbifabric.org/package/schemas/cloud-anchor-subject.v1.schema.json"
+        },
+        {
+          "$ref": "https://orbifabric.org/package/schemas/package-witness-subject.v1.schema.json"
+        },
+        {
+          "$ref": "https://orbifabric.org/package/schemas/delivery-receipt-subject.v1.schema.json"
+        },
+        {
+          "$ref": "https://orbifabric.org/package/schemas/lifecycle-witness-subject.v1.schema.json"
+        }
+      ]
+    },
+    "subject_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "key_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "algorithm": {
+      "const": "ed25519"
+    },
+    "public_key": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{43}$"
+    },
+    "fingerprint": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{86}$"
+    }
+  },
+  "required": [
+    "schema",
+    "kind",
+    "subject",
+    "subject_digest",
+    "key_id",
+    "algorithm",
+    "public_key",
+    "fingerprint",
+    "signature"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,128 @@
+{
+  "schema": "orbifabric.package.vocabulary.v2",
+  "event_types": [
+    "PACKAGE_CREATED",
+    "FILE_ADDED",
+    "FILE_REMOVED",
+    "FILE_MOVED",
+    "FILE_RENAMED",
+    "FILE_CONTENT_CHANGED",
+    "VERSION_CREATED",
+    "TAG_ADDED",
+    "TAG_REMOVED",
+    "NOTE_CREATED",
+    "NOTE_UPDATED",
+    "NOTE_DELETED",
+    "PACKAGE_ARCHIVED",
+    "PACKAGE_RESTORED",
+    "DELIVERY_CREATED",
+    "DELIVERY_COMPLETED",
+    "WITNESS_ATTACHED",
+    "PACKAGE_IMPORTED",
+    "PACKAGE_EXPORTED"
+  ],
+  "source_kinds": [
+    "local_import",
+    "package_import",
+    "google_drive",
+    "onedrive",
+    "dropbox",
+    "external_api",
+    "generated",
+    "other"
+  ],
+  "signer_types": [
+    "local_device",
+    "orbifabric_official"
+  ],
+  "capabilities": [
+    "orbifabric.package.capability.linear-history.v1",
+    "orbifabric.package.capability.content-sha256.v1",
+    "orbifabric.package.capability.portable-memory.v1",
+    "orbifabric.package.capability.version-signature.v1",
+    "orbifabric.package.capability.delivery-evidence.v1"
+  ],
+  "profiles": [
+    "orbifabric.package.profile.complete.v1"
+  ],
+  "evidence_kinds": [
+    "cloud_anchor",
+    "package_witness",
+    "delivery_receipt",
+    "lifecycle_witness"
+  ],
+  "working_states": [
+    "UNBORN",
+    "CLEAN",
+    "DIRTY",
+    "UNREADABLE",
+    "NOT_CHECKED"
+  ],
+  "recognition": [
+    "RECOGNIZED",
+    "NOT_PACKAGE",
+    "UNSUPPORTED"
+  ],
+  "structure": [
+    "VALID",
+    "INVALID",
+    "NOT_CHECKED"
+  ],
+  "history_completeness": [
+    "FULL",
+    "NOT_FULL",
+    "INVALID",
+    "NOT_CHECKED"
+  ],
+  "signature_states": [
+    "VALID",
+    "INVALID",
+    "ABSENT",
+    "NOT_CHECKED"
+  ],
+  "identity_states": [
+    "UNTRUSTED",
+    "TRUSTED",
+    "UNKNOWN"
+  ],
+  "online_states": [
+    "NOT_REQUESTED",
+    "CURRENT",
+    "REVOKED",
+    "UNAVAILABLE"
+  ],
+  "reason_codes": [
+    "OK",
+    "NOT_PACKAGE",
+    "UNSUPPORTED_PROTOCOL",
+    "UNKNOWN_REQUIRED_CAPABILITY",
+    "INVALID_SCHEMA",
+    "INVALID_HEAD",
+    "NON_LINEAR_HISTORY",
+    "MISSING_PARENT",
+    "MISSING_OBJECT",
+    "OBJECT_HASH_MISMATCH",
+    "BAD_SIGNATURE",
+    "PATH_TRAVERSAL",
+    "CASE_CONFLICT",
+    "UNICODE_NORMALIZATION_CONFLICT",
+    "INVALID_PATH",
+    "RESOURCE_LIMIT",
+    "UNSAFE_ARCHIVE",
+    "STALE_HEAD",
+    "INVALID_METADATA",
+    "INVALID_EVIDENCE"
+  ],
+  "committed_integrity": [
+    "VALID",
+    "INVALID",
+    "UNAVAILABLE",
+    "NOT_CHECKED"
+  ],
+  "evidence_states": [
+    "VALID",
+    "INVALID",
+    "ABSENT",
+    "NOT_CHECKED"
+  ]
+}
