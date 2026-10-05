@@ -1,6 +1,6 @@
 # S06 partial checkpoint — canonical JSON and VersionSubject
 
-Status: IN_PROGRESS, not whole-stage acceptance. Frozen authority: package-spec `7ff166365dc83cee783e4e6715225968c81ef7b9`; dependency: S05 merge `25069f7b71ec1dbe49142f9010e055302adeda1d`. Issue #11. Only Apache-2.0 SDK/tests/development evidence changed; no spec/license/consumer mutation or V1 compatibility/migration.
+Status: historical partial checkpoint `2a013ab8e0c78e91f4a220cc40acef6c552b3f2c`, not whole-stage acceptance at that point. See [full S06 evidence](s06-evidence.md) for the subsequent completed stage implementation/checks. Frozen authority: package-spec `7ff166365dc83cee783e4e6715225968c81ef7b9`; dependency: S05 merge `25069f7b71ec1dbe49142f9010e055302adeda1d`. Issue #11. Only Apache-2.0 SDK/tests/development evidence changed; no spec/license/consumer mutation or V1 compatibility/migration.
 
 Implemented subset:
 
