@@ -73,4 +73,6 @@ A future `orbipkg` CLI and optional MCP adapter should reuse `package-go` direct
 
 ## License
 
-The license will be frozen with the open-source policy before the first stable implementation.
+This project is licensed under the **Apache License 2.0**. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
+
+Future Go source files may use the concise SPDX identifier: `SPDX-License-Identifier: Apache-2.0`.
