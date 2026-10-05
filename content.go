@@ -5,7 +5,6 @@ import (
 	"context"
 	"errors"
 	"io"
-	"io/fs"
 	"slices"
 	"strings"
 )
@@ -108,9 +107,14 @@ func verifyCommittedContent(ctx context.Context, source TreeReader, h History, l
 			if r != nil {
 				_ = r.Close()
 			}
-			if err != nil && !errors.Is(err, fs.ErrNotExist) && ctx.Err() != nil {
+			if ctx.Err() != nil {
 				report.Integrity = IntegrityNotChecked
 				return report, ctx.Err()
+			}
+			var p *ProtocolError
+			if errors.As(err, &p) && (p.Code == ReasonResourceLimit || p.Code == ReasonUnsafeArchive) {
+				report.Integrity = IntegrityNotChecked
+				return report, err
 			}
 			report.Missing = append(report.Missing, ref.ContentID)
 			report.addReason(ReasonMissingObject)
@@ -127,6 +131,14 @@ func verifyCommittedContent(ctx context.Context, source TreeReader, h History, l
 			continue
 		}
 		var p *ProtocolError
+		// A codec or input-policy failure is not an ordinary missing object,
+		// including when reported by stream Close after a successful hash.
+		for _, failure := range []error{verifyErr, closeErr} {
+			if errors.As(failure, &p) && (p.Code == ReasonResourceLimit || p.Code == ReasonUnsafeArchive) {
+				report.Integrity = IntegrityNotChecked
+				return report, errors.Join(verifyErr, closeErr)
+			}
+		}
 		if errors.As(verifyErr, &p) && p.Code == ReasonObjectHashMismatch {
 			coverageInvalid = true
 			if required[ref.ContentID] {
@@ -136,12 +148,9 @@ func verifyCommittedContent(ctx context.Context, source TreeReader, h History, l
 			report.addReason(ReasonObjectHashMismatch)
 			continue
 		}
-		if errors.As(verifyErr, &p) && p.Code == ReasonResourceLimit || ctx.Err() != nil {
+		if ctx.Err() != nil {
 			report.Integrity = IntegrityNotChecked
-			if ctx.Err() != nil {
-				return report, ctx.Err()
-			}
-			return report, verifyErr
+			return report, ctx.Err()
 		}
 		report.Missing = append(report.Missing, ref.ContentID)
 		report.addReason(ReasonMissingObject)
