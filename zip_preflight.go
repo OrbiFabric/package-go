@@ -215,51 +215,52 @@ func zipEntryKind(name string, attrs uint32) (string, error) {
 	return "file", nil
 }
 
-func preflightZIP(ctx context.Context, a ArchiveSnapshot, l Limits) (zipPlan, error) {
+func readZIPCentral(ctx context.Context, a ArchiveSnapshot, l Limits) (zipEnd, []zipRecord, []TreeEntry, error) {
 	end, err := readZIPEnd(ctx, a, l)
 	if err != nil {
-		return zipPlan{}, err
+		return zipEnd{}, nil, nil, err
 	}
 	records := make([]zipRecord, 0, int(end.count))
 	raw := make([]TreeEntry, 0, int(end.count))
 	seen := map[string]bool{}
+	duplicate := false
 	position := end.offset
 	var total int64
 	for n := int64(0); n < end.count; n++ {
 		if position > end.end-46 {
-			return zipPlan{}, unsafeZIP("central record outside directory")
+			return zipEnd{}, nil, nil, unsafeZIP("central record outside directory")
 		}
 		b, err := readZIPRange(ctx, a, position, 46)
 		if err != nil {
-			return zipPlan{}, err
+			return zipEnd{}, nil, nil, err
 		}
 		if zipOrder.Uint32(b) != zipCentralSignature {
-			return zipPlan{}, unsafeZIP("invalid central record")
+			return zipEnd{}, nil, nil, unsafeZIP("invalid central record")
 		}
 		flags, method, version := zipOrder.Uint16(b[8:]), zipOrder.Uint16(b[10:]), zipOrder.Uint16(b[6:])
 		if err = zipFlags(flags, method, version); err != nil {
-			return zipPlan{}, err
+			return zipEnd{}, nil, nil, err
 		}
 		namesize, extrasize, commentsize := int64(zipOrder.Uint16(b[28:])), int64(zipOrder.Uint16(b[30:])), int64(zipOrder.Uint16(b[32:]))
 		if namesize > int64(l.MaxPathBytes) {
-			return zipPlan{}, protocolError(ReasonResourceLimit, "ZIP entry name policy")
+			return zipEnd{}, nil, nil, protocolError(ReasonResourceLimit, "ZIP entry name policy")
 		}
 		length := 46 + namesize + extrasize + commentsize
 		if length > end.end-position {
-			return zipPlan{}, unsafeZIP("central variable fields outside directory")
+			return zipEnd{}, nil, nil, unsafeZIP("central variable fields outside directory")
 		}
 		fields, err := readZIPRange(ctx, a, position+46, namesize+extrasize)
 		if err != nil {
-			return zipPlan{}, err
+			return zipEnd{}, nil, nil, err
 		}
 		name := string(fields[:namesize])
 		if !utf8.ValidString(name) {
-			return zipPlan{}, protocolError(ReasonInvalidPath, "ZIP name is not UTF-8")
+			return zipEnd{}, nil, nil, protocolError(ReasonInvalidPath, "ZIP name is not UTF-8")
 		}
 		if flags&0x800 == 0 {
 			for _, r := range name {
 				if r > 127 {
-					return zipPlan{}, unsafeZIP("non-ASCII ZIP name lacks UTF-8 flag")
+					return zipEnd{}, nil, nil, unsafeZIP("non-ASCII ZIP name lacks UTF-8 flag")
 				}
 			}
 		}
@@ -267,7 +268,7 @@ func preflightZIP(ctx context.Context, a ArchiveSnapshot, l Limits) (zipPlan, er
 		needed := []bool{size == 0xffffffff, compressed == 0xffffffff, offset == 0xffffffff, disk == 0xffff}
 		large, err := zipExtra64(fields[namesize:], needed)
 		if err != nil {
-			return zipPlan{}, err
+			return zipEnd{}, nil, nil, err
 		}
 		values := []*uint64{&size, &compressed, &offset, &disk}
 		for i, need := range needed {
@@ -276,34 +277,32 @@ func preflightZIP(ctx context.Context, a ArchiveSnapshot, l Limits) (zipPlan, er
 			}
 		}
 		if disk != 0 {
-			return zipPlan{}, unsafeZIP("multi-volume ZIP entry")
+			return zipEnd{}, nil, nil, unsafeZIP("multi-volume ZIP entry")
 		}
 		if size > uint64(l.MaxFileBytes) || size > uint64(l.MaxTotalBytes-total) || size > uint64(MaxProtocolInteger) {
-			return zipPlan{}, protocolError(ReasonResourceLimit, "ZIP expanded byte policy")
+			return zipEnd{}, nil, nil, protocolError(ReasonResourceLimit, "ZIP expanded byte policy")
 		}
 		if compressed > uint64(end.offset) || offset > uint64(end.offset) || compressed > uint64(end.offset)-offset {
-			return zipPlan{}, unsafeZIP("compressed ZIP body outside local region")
+			return zipEnd{}, nil, nil, unsafeZIP("compressed ZIP body outside local region")
 		}
 		if size != 0 && (compressed == 0 || float64(size) > float64(compressed)*l.MaxCompressionRatio) {
-			return zipPlan{}, protocolError(ReasonResourceLimit, "ZIP compression ratio policy")
+			return zipEnd{}, nil, nil, protocolError(ReasonResourceLimit, "ZIP compression ratio policy")
 		}
 		if method == 0 && size != compressed {
-			return zipPlan{}, unsafeZIP("STORE ZIP size mismatch")
+			return zipEnd{}, nil, nil, unsafeZIP("STORE ZIP size mismatch")
 		}
 		kind, err := zipEntryKind(name, zipOrder.Uint32(b[38:]))
 		if err != nil {
-			return zipPlan{}, err
+			return zipEnd{}, nil, nil, err
 		}
 		if kind == "directory" && size != 0 {
-			return zipPlan{}, unsafeZIP("ZIP directory carries payload")
+			return zipEnd{}, nil, nil, unsafeZIP("ZIP directory carries payload")
 		}
 		key := name
 		if kind == "directory" {
 			key = strings.TrimSuffix(name, "/")
 		}
-		if seen[key] {
-			return zipPlan{}, unsafeZIP("duplicate ZIP path")
-		}
+		duplicate = duplicate || seen[key]
 		seen[key] = true
 		raw = append(raw, TreeEntry{Path: name, Kind: kind, Size: int64(size)})
 		records = append(records, zipRecord{name: name, kind: kind, flags: flags, method: method, crc: zipOrder.Uint32(b[16:]), size: int64(size), compressed: int64(compressed), offset: int64(offset)})
@@ -311,17 +310,32 @@ func preflightZIP(ctx context.Context, a ArchiveSnapshot, l Limits) (zipPlan, er
 		position += length
 	}
 	if position != end.end {
-		return zipPlan{}, unsafeZIP("central directory has extra/unaccounted records")
+		return zipEnd{}, nil, nil, unsafeZIP("central directory has extra/unaccounted records")
 	}
-	// ALL paths (including names outside any candidate Root) precede local
-	// header/content reads and any extraction. No path cleaning or renaming.
+	if duplicate {
+		return end, records, raw, unsafeZIP("duplicate ZIP path")
+	}
+	return end, records, raw, nil
+}
+
+func preflightZIP(ctx context.Context, a ArchiveSnapshot, l Limits) (zipPlan, error) {
+	end, records, raw, err := readZIPCentral(ctx, a, l)
+	if err != nil {
+		if len(records) != 0 {
+			err = rejectedZIPMarker(ctx, a, end, records, l, err)
+		}
+		return zipPlan{}, err
+	}
+	// ALL paths (including names outside any candidate Root) precede exposing
+	// local entry streams or extraction. Rejection may read only an exact safe
+	// discriminator for recognition; it never permits the rejected tree.
 	entries, err := preflightTree(ctx, raw, l, false)
 	if err != nil {
-		return zipPlan{}, err
+		return zipPlan{}, rejectedZIPMarker(ctx, a, end, records, l, err)
 	}
 	plan, err := selectZIPRoot(ctx, entries, records, l)
 	if err != nil {
-		return zipPlan{}, err
+		return zipPlan{}, rejectedZIPMarker(ctx, a, end, records, l, err)
 	}
 	slices.SortFunc(records, func(a, b zipRecord) int {
 		if a.offset < b.offset {

@@ -244,6 +244,17 @@ func TestZIPWriterSubjectAndByteInvariance(t *testing.T) {
 			for _, option := range []pkg.ZIPOptions{{DisplayDirectory: "Demo", Method: zip.Store}, {DisplayDirectory: "別名", Method: zip.Deflate, CompressionLevel: flate.BestCompression}, {DisplayDirectory: "Demo", Method: zip.Deflate, CompressionLevel: flate.BestSpeed}, {DisplayDirectory: ".PACKTELL", Method: zip.Store}} {
 				var pending bytes.Buffer
 				result, err := pkg.WriteZIP(ctx, source, &pending, option, l, support)
+				if fixture == "bad-signature" {
+					requireCode(t, err, pkg.ReasonBadSignature)
+					if result != (pkg.ZIPWriteResult{}) || pending.Len() != 0 {
+						t.Fatal("bad signature produced writer output", result, pending.Len())
+					}
+					view, err := pkg.Verify(ctx, source, l, pkg.VerificationOptions{Support: pkg.CompleteSupport()})
+					if err != nil || view.Result.Signature != pkg.SignatureInvalid || view.Result.HistoryCompleteness != pkg.HistoryFull {
+						t.Fatal("original independent proof changed", view, err)
+					}
+					continue
+				}
 				if err != nil {
 					t.Fatal(err)
 				}

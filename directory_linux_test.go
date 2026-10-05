@@ -573,11 +573,18 @@ func TestDirectoryPreservesAttestationsAndRequiresEmbeddedPresence(t *testing.T)
 			parent := t.TempDir()
 			destination := filepath.Join(parent, "output")
 			out, err := pkg.PublishDirectory(context.Background(), source, nativeDirectoryHost(t, destination), pkg.DefaultLimits(), supportAllVocabulary())
-			if name == "missing-embedded" {
+			if name == "missing-embedded" || name == "bad-signature" {
 				if err == nil || out != (pkg.DirectoryPublication{}) {
 					t.Fatal(out, err)
 				}
 				assertNoDirectoryOutput(t, parent, destination)
+				if name == "bad-signature" {
+					requireCode(t, err, pkg.ReasonBadSignature)
+					view, err := pkg.Verify(context.Background(), source, pkg.DefaultLimits(), pkg.VerificationOptions{Support: pkg.CompleteSupport()})
+					if err != nil || view.Result.Signature != pkg.SignatureInvalid || view.Result.HistoryCompleteness != pkg.HistoryFull {
+						t.Fatal("writer rejection contaminated original proof", view, err)
+					}
+				}
 				return
 			}
 			if err != nil {
@@ -592,7 +599,7 @@ func TestDirectoryPreservesAttestationsAndRequiresEmbeddedPresence(t *testing.T)
 				t.Fatal(err)
 			}
 			report, err := pkg.VerifySignatures(context.Background(), s, pkg.DefaultLimits(), supportAllVocabulary(), nil)
-			if err != nil || name == "bad-signature" && report.State != pkg.SignatureInvalid {
+			if err != nil || report.State != pkg.SignatureValid {
 				t.Fatal(report, err)
 			}
 			if err = s.Close(); err != nil {
