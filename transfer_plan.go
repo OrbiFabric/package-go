@@ -92,6 +92,9 @@ func (p TransferPlan) Summary() TransferSummary {
 	s.Input = cloneTransferProof(s.Input)
 	return s
 }
+
+// PlanExport rejects known-invalid signatures/evidence as well as invalid
+// history/objects. It never repairs a negative input or requires identity trust.
 func PlanExport(ctx context.Context, source SnapshotSource, l Limits, support CapabilitySupport, options TransferOptions) (TransferPlan, error) {
 	return planTransfer(ctx, "export", source, l, support, options)
 }
@@ -200,16 +203,19 @@ func inspectTransfer(ctx context.Context, source TreeReader, l Limits, support C
 	if err != nil {
 		return History{}, p, err
 	}
-	content, err := verifyCommittedContent(ctx, source, h, l)
+	memory, err := readPortableMemory(ctx, source, h, l)
 	if err != nil {
 		return History{}, p, err
 	}
-	memory, err := readPortableMemory(ctx, source, h, l)
+	content, err := verifyCommittedContent(ctx, source, h, l)
 	if err != nil {
 		return History{}, p, err
 	}
 	evidence, err := verifyEvidence(ctx, source, h, memory, l, support, nil)
 	if err != nil {
+		return History{}, p, err
+	}
+	if err = validateWriteAttestations(ctx, source, h, evidence, l, support); err != nil {
 		return History{}, p, err
 	}
 	p.CommittedIntegrity = content.Integrity
@@ -227,6 +233,8 @@ func inspectTransfer(ctx context.Context, source TreeReader, l Limits, support C
 		p.HistoryCompleteness = HistoryInvalid
 	} else if len(p.MissingObjects) != 0 || len(p.MissingMemory) != 0 || len(p.MissingEmbedded) != 0 {
 		p.HistoryCompleteness = HistoryNotFull
+	} else if evidence.State == EvidenceNotChecked {
+		p.HistoryCompleteness = HistoryNotChecked
 	}
 	return h, p, nil
 }

@@ -45,8 +45,9 @@ type DirectoryPublication struct {
 // PublishDirectory preserves every byte of one stable Package tree, including
 // dirty Working Tree, unknown optional fields/extensions and empty folders.
 // It validates committed history, all objects, portable memory and embedded
-// presence before no-overwrite publication. Signature/evidence mathematics is
-// independent: invalid attestations are retained, never silently removed.
+// presence before no-overwrite publication. Known-invalid attestations reject
+// before output begins and remain unchanged in the original input. Verification
+// still reports their mathematics independently from content/completeness.
 // This operation does not claim a conformance level or emit a FULL verdict.
 func PublishDirectory(ctx context.Context, source SnapshotSource, host DirectoryHost, l Limits, support CapabilitySupport) (out DirectoryPublication, err error) {
 	if err = l.Validate(); err != nil {
@@ -177,6 +178,10 @@ func validateDirectoryTree(ctx context.Context, source TreeReader, l Limits, sup
 	if err != nil {
 		return History{}, err
 	}
+	memory, err := readPortableMemory(ctx, source, h, l)
+	if err != nil {
+		return History{}, err
+	}
 	content, err := verifyCommittedContent(ctx, source, h, l)
 	if err != nil {
 		return History{}, err
@@ -186,10 +191,6 @@ func validateDirectoryTree(ctx context.Context, source TreeReader, l Limits, sup
 	}
 	if len(content.Invalid) != 0 {
 		return History{}, protocolError(ReasonObjectHashMismatch, "directory object validation failed")
-	}
-	memory, err := readPortableMemory(ctx, source, h, l)
-	if err != nil {
-		return History{}, err
 	}
 	complete := containsText(h.Root.Format.Profiles, ProfileComplete)
 	for _, v := range h.Versions {
@@ -205,7 +206,26 @@ func validateDirectoryTree(ctx context.Context, source TreeReader, l Limits, sup
 	if len(evidence.MissingEmbedded) != 0 {
 		return History{}, protocolError(ReasonInvalidEvidence, "declared embedded evidence absent")
 	}
+	if err = validateWriteAttestations(ctx, source, h, evidence, l, support); err != nil {
+		return History{}, err
+	}
 	return h, nil
+}
+
+// Every Package writer shares this gate. Rejection preserves original bytes;
+// it cannot repair/delete a bad seal or require trust for valid mathematics.
+func validateWriteAttestations(ctx context.Context, source TreeReader, h History, evidence EvidenceVerification, l Limits, support CapabilitySupport) error {
+	signatures, err := verifySignatures(ctx, source, h, l, support, nil)
+	if err != nil {
+		return err
+	}
+	if signatures.State == SignatureInvalid {
+		return protocolError(ReasonBadSignature, "invalid source signature prevents output")
+	}
+	if evidence.State == EvidenceInvalid {
+		return protocolError(ReasonInvalidEvidence, "invalid source evidence prevents output")
+	}
+	return nil
 }
 
 func copyDirectoryFile(ctx context.Context, source TreeReader, output PayloadWriter, e TreeEntry) (digest [32]byte, err error) {

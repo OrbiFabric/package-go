@@ -654,5 +654,6 @@
     "linux": "Runtime safety covered by full existing stage suites plus verifier cases",
     "windows_amd64": "Compile only; native runtime NOT_RUN",
     "darwin_arm64": "Compile only; native runtime NOT_RUN"
-  }
+  },
+  "report_scope": "Historical verifier checkpoint, superseded by docs/s11-conformance.md and docs/s11-level-results.json; final exact producer handoff is in Issue #21."
 }
