@@ -1,0 +1,31 @@
+{
+  "id": "orbifabric.package.profile.complete.v1",
+  "protocol": "orbifabric.package",
+  "protocol_version": "2.0",
+  "tree_profile": "orbifabric.package-tree.v1",
+  "required_capabilities": [
+    "orbifabric.package.capability.linear-history.v1",
+    "orbifabric.package.capability.content-sha256.v1",
+    "orbifabric.package.capability.portable-memory.v1"
+  ],
+  "required_paths": [
+    ".packtell/format.json",
+    ".packtell/package.json",
+    ".packtell/HEAD",
+    ".packtell/versions/",
+    ".packtell/objects/sha256/",
+    ".packtell/metadata/package.json",
+    ".packtell/metadata/notes.json",
+    ".packtell/metadata/tags.json",
+    ".packtell/metadata/provenance.json",
+    ".packtell/history/events.ndjson"
+  ],
+  "history_enumeration": "unique HEAD -> parent_version_id -> null; every committed version directory must be on chain",
+  "object_coverage": "union of file content_id across every committed manifest, including HEAD",
+  "network_allowed": false,
+  "working_tree_may_be_dirty": true,
+  "signatures_required_by_profile": false,
+  "evidence": "optional; declared embedded must be present; external references do not require network",
+  "verification_clause": "PKG-CONTRACT-018",
+  "signature_policy_clause": "PKG-CONTRACT-012"
+}

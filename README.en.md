@@ -69,7 +69,7 @@ A future `orbipkg` CLI and optional MCP adapter should reuse `package-go` direct
 
 ## Status
 
-**Bootstrap / implementation pending.** The repository currently freezes responsibilities and dependency boundaries; concrete APIs will be implemented alongside frozen Package 2.0 normative fields and conformance fixtures.
+**Foundation implemented; APIs provisional.** The module provides strict bounded JSON parsing, format/capability recognition, independent result dimensions, explicit cancellable Host ports, and content stream hash/size verification. Protocol authority is pinned to `7ff166365dc83cee783e4e6715225968c81ef7b9`; verbatim machine assets are embedded for offline conformance development. Full tree, history, signing, codec, and seven-level conformance are not yet implemented or certified. See [foundation contract](docs/foundation.md).
 
 ## License
 

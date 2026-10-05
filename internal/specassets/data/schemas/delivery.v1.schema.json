@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://orbifabric.org/package/schemas/delivery.v1.schema.json",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "orbifabric.package.delivery.v1"
+    },
+    "delivery_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "package_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "package_version_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "subject_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$"
+    },
+    "recipient": {
+      "type": "string"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "channel": {
+      "type": "string"
+    },
+    "signature_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "cloud_anchor",
+              "delivery_receipt",
+              "lifecycle_witness",
+              "package_witness"
+            ]
+          },
+          "embedded": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "evidence_id",
+          "kind",
+          "embedded"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schema",
+    "delivery_id",
+    "package_id",
+    "package_version_id",
+    "subject_digest",
+    "created_at",
+    "signature_ids",
+    "evidence_refs"
+  ],
+  "additionalProperties": false
+}

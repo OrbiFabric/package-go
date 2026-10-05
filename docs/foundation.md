@@ -1,0 +1,21 @@
+# SDK foundation (S01)
+
+Protocol authority: [package-spec at 7ff166365dc83cee783e4e6715225968c81ef7b9](https://github.com/OrbiFabric/package-spec/tree/7ff166365dc83cee783e4e6715225968c81ef7b9), primary Chinese contracts PKG-CONTRACT-001/005/019/020/021. The SDK does not define or modify authority. Apache-2.0 applies; embedded assets retain the upstream LICENSE/NOTICE.
+
+Module: `github.com/orbifabric/package-go`, package `packagego`; minimum Go 1.23. APIs remain provisional during staged implementation.
+
+`ReadFormat` receives only the explicit format.json stream. It recognizes the discriminator, validates its closed structure, mandatory/sorted/disjoint capabilities and extension declarations, and rejects unsupported required semantics/profiles. Unknown optional capability and extension declarations are retained. CapabilitySupport expresses the caller's supported semantics; supplying vocabulary names does not implement those semantics. CoreSupport supplies the two mandatory names for foundation tests. This operation neither opens a Package nor certifies any Reader/Writer level.
+
+`ReadProtocolJSON` rejects malformed UTF-8, duplicate decoded keys, isolated surrogates, BOM/trailing data, floating/exponent/negative-zero and out-of-safe-domain integers. Input bytes, nesting depth and collection size are bounded before value allocation. It accepts legitimate insignificant whitespace and string escape variants; canonical output belongs to the later canonicalization stage.
+
+`UncheckedResult` keeps unperformed dimensions NOT_CHECKED; identity is UNKNOWN and online is NOT_REQUESTED. Recognition stays unset until attempted because the frozen recognition vocabulary has no NOT_CHECKED value. Reason codes form a deduplicated set. DIRTY, bad signatures, identity trust and content integrity are independent facts. Errors from Host I/O or context cancellation remain Host errors, without inventing protocol reason codes.
+
+All external effects require explicit Host ports: TreeReader, ContentResolver, Signer and TrustPolicy. Hosts authorize one Root, reject link traversal, provide stable streams, and honor context cancellation within blocking calls. Context checks in the SDK guard before/after reads and final writes; they cannot interrupt a Host reader that violates its cancellation contract. Signer keys/official facts are public; credential locators/private keys do not enter portable documents. Trust has an explicit purpose and does not follow mathematical validity automatically. Offline completeness checks must never call ContentResolver.
+
+`CopyVerifiedContent` checks declared size/resource policy and SHA-256 over raw returned bytes, including zero-length content. It writes to caller-isolated pending output only. The caller discards pending bytes on any error and publishes only after full-plan validation; hash success alone does not commit a Package. Expected revision binding and multi-object export budgets belong to subsequent planning/adapters.
+
+Default Host resource policy: 100,000 entries (also per JSON collection), 8 GiB single file, 64 GiB total expansion, 16 MiB JSON, depth 64, 1 MiB NDJSON line, compression ratio 1000. Fields must be positive and finite. Formats/codecs must enforce the applicable budgets before expansion/publication. These numbers are policy, not normative protocol limits.
+
+`conformance.Assets()` is a read-only embedded filesystem of exact upstream JSON inputs. `VerifyAssets()` checks authority, file inventory and SHA-256 lock. Loading these assets is offline and uses no module downloads, schema URL dereferencing or sibling repository. Snapshot identity is additionally verified against the frozen git tree during stage validation. Snapshot bytes/expected values must never be regenerated from SDK output; changing the frozen authority requires explicit approval.
+
+Implemented fixture coverage at S01: format recognition from `core-minimal`; fail-closed required capability from `unknown-required-capability`. All remaining fixture dimensions, crypto vectors, Writer/Reader/Complete/Verifier/Directory/ZIP levels and product workflows are NOT_RUN at this stage. Full shared conformance is the later producer freeze gate. No network, product/database/Provider runtime or V1 compatibility/migration is implemented.

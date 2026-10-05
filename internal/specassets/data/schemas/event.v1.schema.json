@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://orbifabric.org/package/schemas/event.v1.schema.json",
+  "type": "object",
+  "properties": {
+    "schema": {
+      "const": "orbifabric.package.event.v1"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "package_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "type": {
+      "oneOf": [
+        {
+          "enum": [
+            "PACKAGE_CREATED",
+            "FILE_ADDED",
+            "FILE_REMOVED",
+            "FILE_MOVED",
+            "FILE_RENAMED",
+            "FILE_CONTENT_CHANGED",
+            "VERSION_CREATED",
+            "TAG_ADDED",
+            "TAG_REMOVED",
+            "NOTE_CREATED",
+            "NOTE_UPDATED",
+            "NOTE_DELETED",
+            "PACKAGE_ARCHIVED",
+            "PACKAGE_RESTORED",
+            "DELIVERY_CREATED",
+            "DELIVERY_COMPLETED",
+            "WITNESS_ATTACHED",
+            "PACKAGE_IMPORTED",
+            "PACKAGE_EXPORTED"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*(\\.[a-z][a-z0-9-]*)+$"
+        }
+      ]
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{6}Z$"
+    },
+    "actor": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "person",
+                "application",
+                "unknown"
+              ]
+            },
+            "id": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "id"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "subject": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "package",
+            "file",
+            "folder",
+            "version",
+            "event"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "schema",
+    "event_id",
+    "package_id",
+    "type",
+    "schema_version",
+    "occurred_at",
+    "actor",
+    "subject",
+    "data"
+  ],
+  "additionalProperties": false
+}
