@@ -69,7 +69,7 @@ Package 1.x 是未发布开发协议。`package-go` **不实现 1.x reader、wri
 
 ## Status
 
-**SDK foundation、core model 与 tree inspection 已实现；API 暂未冻结。** 模块提供受限 JSON 输入、format/capability 识别、独立结果维度、显式可取消 Host ports 及内容流 hash/size 校验。规范锁定 `7ff166365dc83cee783e4e6715225968c81ef7b9`；机器资产原样嵌入供离线一致性开发使用。完整 history/signing/codec 和七级 conformance 尚未实现或认证。Core IDs、Package/Version/manifest、空目录、保持 identity 的 working proposals 与精确 Unicode 16 NFC 已实现。参见 [foundation contract](docs/foundation.md) 、[core model](docs/model.md) 与 [tree/Working Tree contract](docs/tree.md)。Root safety、HEAD、snapshot scan/diff 已实现。
+**SDK foundation、core model、tree inspection 与线性 Version lifecycle 已实现；API 暂未冻结。** 模块提供受限 JSON 输入、format/capability 识别、独立结果维度、显式可取消 Host ports 及内容流 hash/size 校验。规范锁定 `7ff166365dc83cee783e4e6715225968c81ef7b9`；机器资产原样嵌入供离线一致性开发使用。完整 Complete-profile verification/signing/codec 和七级 conformance 尚未实现或认证。Core IDs、Package/Version/manifest、空目录、保持 identity 的 working proposals 与精确 Unicode 16 NFC 已实现。参见 [foundation contract](docs/foundation.md) 、[core model](docs/model.md) 与 [tree/Working Tree contract](docs/tree.md)。Root safety、HEAD、snapshot scan/diff、unsigned isolated commits 与全历史 object verification/reconstruction 已实现。参见 [history/commit contract](docs/history.md)。
 
 ## License
 

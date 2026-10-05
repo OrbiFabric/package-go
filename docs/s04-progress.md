@@ -1,4 +1,6 @@
-# S04 in-progress evidence (not stage acceptance)
+# S04 earlier partial checkpoint (historical evidence)
+
+This file records the earlier pushed partial checkpoint. Current stage evidence is [s04-evidence.md](s04-evidence.md); it does not replace the original command scope below.
 
 Frozen protocol authority: `7ff166365dc83cee783e4e6715225968c81ef7b9`.
 Source baseline / merged S03: `110a55da17c9714d51585cfeea9bc8be55f84177`.

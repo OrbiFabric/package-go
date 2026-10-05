@@ -70,14 +70,8 @@ func ReadRoot(ctx context.Context, source TreeReader, l Limits, support Capabili
 	for _, e := range entries {
 		nodes[e.Path] = e
 	}
-	var totalJSON int64
-	for _, entry := range entries {
-		if entry.Kind == "file" && strings.HasPrefix(entry.Path, ".packtell/") && strings.HasSuffix(entry.Path, ".json") && !strings.HasPrefix(entry.Path, ".packtell/extensions/") {
-			if entry.Size > l.MaxTotalJSONBytes-totalJSON {
-				return out, protocolError(ReasonResourceLimit, "aggregate control JSON byte budget")
-			}
-			totalJSON += entry.Size
-		}
+	if err = validateControlJSONBudget(entries, l); err != nil {
+		return out, err
 	}
 	e, present := nodes[".packtell/format.json"]
 	if !present || e.Kind != "file" {
@@ -276,4 +270,17 @@ func allowedControl(p, kind string, declared map[string]bool) bool {
 		return strings.HasSuffix(parts[3], ".json") && validUUID(strings.TrimSuffix(parts[3], ".json"))
 	}
 	return false
+}
+
+func validateControlJSONBudget(entries []TreeEntry, l Limits) error {
+	var total int64
+	for _, entry := range entries {
+		if entry.Kind == "file" && strings.HasPrefix(entry.Path, ".packtell/") && strings.HasSuffix(entry.Path, ".json") && !strings.HasPrefix(entry.Path, ".packtell/extensions/") {
+			if entry.Size > l.MaxTotalJSONBytes-total {
+				return protocolError(ReasonResourceLimit, "aggregate control JSON byte budget")
+			}
+			total += entry.Size
+		}
+	}
+	return nil
 }
