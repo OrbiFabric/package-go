@@ -300,7 +300,7 @@ func (e Entry) Validate() error {
 	default:
 		return schemaError("unknown entry kind")
 	}
-	return nil
+	return ValidateComponent(e.Name)
 }
 func parseEntry(m map[string]any) (Entry, error) {
 	e := Entry{Kind: asString(m["kind"]), Name: asString(m["name"])}
@@ -392,6 +392,7 @@ func (m Manifest) Validate(ctx context.Context, l Limits) error {
 	}
 	byID := map[UUID]Entry{}
 	siblings := map[string]bool{}
+	foldedSiblings := map[string]string{}
 	sizes := map[ContentID]int64{}
 	prior := UUID("")
 	for _, e := range m.Entries {
@@ -415,6 +416,14 @@ func (m Manifest) Validate(ctx context.Context, l Limits) error {
 			return schemaError("duplicate sibling name")
 		}
 		siblings[key] = true
+		if e.ParentFolderID == nil && PathCollisionKey(e.Name) == ".packtell" {
+			return protocolError(ReasonInvalidPath, "manifest contains reserved Root control namespace")
+		}
+		foldedKey := parent + "/" + PathCollisionKey(e.Name)
+		if name, ok := foldedSiblings[foldedKey]; ok && name != e.Name {
+			return protocolError(ReasonCaseConflict, "manifest sibling full-fold collision")
+		}
+		foldedSiblings[foldedKey] = e.Name
 		if e.Kind == "file" {
 			if size, ok := sizes[e.ContentID]; ok && size != e.Size {
 				return schemaError("same ContentID has unequal sizes")

@@ -69,7 +69,7 @@ A future `orbipkg` CLI and optional MCP adapter should reuse `package-go` direct
 
 ## Status
 
-**Foundation and core model implemented; APIs provisional.** The module provides strict bounded JSON parsing, format/capability recognition, independent result dimensions, explicit cancellable Host ports, and content stream hash/size verification. Protocol authority is pinned to `7ff166365dc83cee783e4e6715225968c81ef7b9`; verbatim machine assets are embedded for offline conformance development. Full tree, history, signing, codec, and seven-level conformance are not yet implemented or certified. Core IDs and Package/Version/manifest models, explicit empty folders, identity-preserving working proposals and exact Unicode 16 NFC are implemented. See [foundation contract](docs/foundation.md) and [core model](docs/model.md).
+**Foundation, core model and tree inspection implemented; APIs provisional.** The module provides strict bounded JSON parsing, format/capability recognition, independent result dimensions, explicit cancellable Host ports, and content stream hash/size verification. Protocol authority is pinned to `7ff166365dc83cee783e4e6715225968c81ef7b9`; verbatim machine assets are embedded for offline conformance development. Full history, signing, codec, and seven-level conformance are not yet implemented or certified. Core IDs and Package/Version/manifest models, explicit empty folders, identity-preserving working proposals and exact Unicode 16 NFC are implemented. See [foundation contract](docs/foundation.md), [core model](docs/model.md), and [tree/Working Tree contract](docs/tree.md). Root safety, exact HEAD, snapshot scanning and identity-aware diff are implemented.
 
 ## License
 

@@ -16,6 +16,7 @@ var rawTables []byte
 var ccc map[rune]int
 var decomp map[rune][]rune
 var compose map[[2]rune]rune
+var fold map[rune][]rune
 
 func init() {
 	var t struct {
@@ -23,9 +24,15 @@ func init() {
 		CCC     map[string]int
 		Decomp  map[string][]rune
 		Compose map[string]rune
+		Fold    map[string][]rune
 	}
 	if err := json.Unmarshal(rawTables, &t); err != nil || t.Version != "16.0.0" {
 		panic("invalid pinned Unicode 16 tables")
+	}
+	fold = map[rune][]rune{}
+	for k, v := range t.Fold {
+		n, _ := strconv.Atoi(k)
+		fold[rune(n)] = v
 	}
 	ccc = map[rune]int{}
 	decomp = map[rune][]rune{}
@@ -120,3 +127,17 @@ func NFC(s string) string {
 	}
 	return string(out)
 }
+
+// Fold applies Unicode 16 Default Full Case Folding (C/F only, never Turkic T).
+func Fold(s string) string {
+	out := []rune{}
+	for _, r := range s {
+		if v, ok := fold[r]; ok {
+			out = append(out, v...)
+		} else {
+			out = append(out, r)
+		}
+	}
+	return string(out)
+}
+func CollisionKey(s string) string { return NFC(Fold(NFC(s))) }
