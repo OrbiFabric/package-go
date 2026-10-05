@@ -73,4 +73,6 @@ Package 1.x 是未发布开发协议。`package-go` **不实现 1.x reader、wri
 
 ## License
 
-License 将在首次稳定实现前与 `package-spec` 的开放策略一起冻结。
+本项目采用 **Apache License 2.0**。详情见 [LICENSE](LICENSE) 与 [NOTICE](NOTICE)。
+
+后续 Go 源码可以使用简短 SPDX 标识：`SPDX-License-Identifier: Apache-2.0`。
