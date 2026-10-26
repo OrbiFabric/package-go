@@ -13,3 +13,18 @@ Initial adoption exposed an upstream fixture defect: Complete inputs were assign
 Actual first corrected run: Go 1.26.8 Linux amd64, `GOPROXY=off GOSUMDB=off go test -count=1 ./...` PASS. `python3 scripts/check-foundation.py --spec-dir /home/ketao/projects/package-spec` PASS: exact 66 upstream assets and 125 production dependency packages with no external/network/database runtime imports. `git diff --check` PASS. Fixed-source race/vet, independent review and ordinary merge/main read-back are recorded in the adoption PR after execution.
 
 The original local failure log remains `/tmp/packtell-package-go-utc-first.log`; the corrected run is `/tmp/packtell-package-go-utc-second.log`. These local files contain synthetic test results, not product/Provider credentials. Cloud/Packtell consumer pins and real official Provider/native integration remain **NOT_RUN here** and belong to the following Goal stages. No Production or public release authorization.
+
+## Fixed-source exit evidence
+
+Tested and independently reviewed SDK implementation: `a21ee79363537f5a310bc8ebc1e486051be1b327`. Subsequent report-only commits do not change the reviewed implementation, tests or embedded assets. Actual commands on this clean source:
+
+```sh
+GOPROXY=off GOSUMDB=off PACKAGE_GO_CONFORMANCE_REPORT=/tmp/packtell-package-go-utc-conformance.json go test -race -count=1 ./...
+GOPROXY=off GOSUMDB=off go vet ./...
+python3 scripts/check-foundation.py --spec-dir /home/ketao/projects/package-spec
+git diff --check
+```
+
+All PASS on Go 1.26.8 Linux amd64. The generated report binds spec `181f9c2048b7cad346044a6fa4a15096166e83d4`, implementation `a21ee79363537f5a310bc8ebc1e486051be1b327` and `working_tree_clean=true`. It records **241/241 comparison passes**: Core Reader 16, Core Writer 16, Complete Reader 41, Complete Writer 41, Verifier 41, Directory Codec 41 and ZIP Codec 45. The original cases account for 136 and the new time negatives for 105; rejection does not mean semantic validation success. Full race output is retained at `/tmp/packtell-package-go-utc-race.log`.
+
+Independent reviewer: separate read-only agent `/root/protocol_review`, same implementation SHA. The reviewer executed timestamp, Subject, strict signature, Evidence/append invariants and the complete seven-level matrix, verified all 66 embedded assets and the dependency boundary, and found no blocker. It confirmed there is no UUIDv7/domain/purpose/capability change or legacy time fallback. Ordinary PR Merge Commit and main SHA read-back are recorded in the adoption PR; Cloud/Packtell must pin that merged SDK source rather than a floating development branch.
