@@ -8,7 +8,7 @@
 package packagego
 
 const (
-	SpecCommit                 = "7ff166365dc83cee783e4e6715225968c81ef7b9"
+	SpecCommit                 = "181f9c2048b7cad346044a6fa4a15096166e83d4"
 	Protocol                   = "orbifabric.package"
 	ProtocolVersion            = "2.0"
 	TreeProfile                = "orbifabric.package-tree.v1"

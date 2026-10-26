@@ -15,7 +15,7 @@ import (
 	pkg "github.com/orbifabric/package-go"
 )
 
-const memoryTime = "2026-10-05T00:00:00.000000Z"
+const memoryTime = "2026-10-05T00:00:00.000000+00:00"
 
 func memoryID(n int) pkg.UUID { return pkg.UUID(fmt.Sprintf("019a0000-0000-7000-8000-%012x", n)) }
 func portableEvent(n int, typ string) pkg.Event {
@@ -131,7 +131,7 @@ func TestEventsRecordOrderUnknownFactsAndNDJSON(t *testing.T) {
 	ctx := context.Background()
 	l := pkg.DefaultLimits()
 	first := portableEvent(40, "PACKAGE_CREATED")
-	first.OccurredAt = "2026-10-06T00:00:00.000000Z"
+	first.OccurredAt = "2026-10-06T00:00:00.000000+00:00"
 	second := portableEvent(41, "org.example.future")
 	second.Actor = &pkg.EventActor{Kind: "application", ID: "opaque"}
 	second.Data = map[string]any{"uninterpreted": []any{int64(7), true, "\r\ufeff"}}

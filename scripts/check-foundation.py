@@ -17,7 +17,7 @@ parser.add_argument('--spec-dir', type=Path)
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[1]
 lock = json.loads((root / 'internal/specassets/checksums.json').read_text())
-authority = '7ff166365dc83cee783e4e6715225968c81ef7b9'
+authority = '181f9c2048b7cad346044a6fa4a15096166e83d4'
 assert lock['authority'] == authority
 snapshot = root / 'internal/specassets/data'
 assert {p.relative_to(snapshot).as_posix() for p in snapshot.rglob('*.json')} == set(lock['sha256'])

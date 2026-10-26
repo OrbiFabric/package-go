@@ -1,6 +1,6 @@
 # Portable memory (S05)
 
-Authority: frozen package-spec `7ff166365dc83cee783e4e6715225968c81ef7b9`, PKG-CONTRACT-001/013/014/019/020 and metadata/notes/tags/provenance/event schemas. SDK APIs remain provisional; no protocol authority or frozen assets change.
+Authority: frozen package-spec `181f9c2048b7cad346044a6fa4a15096166e83d4`, PKG-CONTRACT-001/013/014/019/020 and metadata/notes/tags/provenance/event schemas. SDK APIs remain provisional; no protocol authority or frozen assets change.
 
 `ReadMetadata`, `ReadNotes`, `ReadTags`, `ReadProvenance` and `ReadEvent` apply the restricted JSON parser plus exact schema fields, constants, types, UUIDv7 and microsecond Gregorian UTC time constraints. Closed documents/records/targets/actors/relationships reject extra fields. Mutable metadata preserves open optional fields and namespaced extension objects; event data preserves arbitrary allowed JSON values. Unknown optional namespaced event types remain uninterpreted explanations, not executable state transitions. Required interpretation belongs in declared required capabilities, which Root/history readers check before reading these facts.
 

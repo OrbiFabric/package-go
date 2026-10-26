@@ -1,6 +1,6 @@
 # Root, path, HEAD and Working Tree contract (S03)
 
-Authority remains frozen `7ff166365dc83cee783e4e6715225968c81ef7b9`, contracts 002/003/004/008/016. Public APIs remain provisional. No alternate/V1 layout, fallback, old-data migration, network or product/DB dependency exists.
+Authority remains frozen `181f9c2048b7cad346044a6fa4a15096166e83d4`, contracts 002/003/004/008/016. Public APIs remain provisional. No alternate/V1 layout, fallback, old-data migration, network or product/DB dependency exists.
 
 PreflightTree examines all supplied paths, kinds and implicit parents before payload I/O. It rejects traversal/absolute/drive/UNC/backslash paths, duplicate/file-directory conflicts, links/junctions/special nodes, nonportable components, reserved Windows basenames, trailing dots/spaces, C0/DEL and names exceeding 255 UTF-16 units. Whole-tree NFC collisions precede Unicode16 full-fold collisions and individual name rejection. Root control namespace aliases are reserved; a nested .packtell remains ordinary payload. Returned paths are sorted and have no trailing slash. Counts include implicit directories; budgets include supplied control/object/payload bytes. Host policy separately limits path bytes and tree depth, without changing normative component limits.
 

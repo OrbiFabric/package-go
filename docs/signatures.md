@@ -1,6 +1,6 @@
 # Canonical subjects and signatures (S06)
 
-Authority: frozen package-spec `7ff166365dc83cee783e4e6715225968c81ef7b9`, PKG-CONTRACT-009/010/011/012/021/022 and its machine schemas/crypto vectors. APIs remain provisional until the producer freeze; no V1 canonical/Merkle/proof/dual-sign protocol or migration is implemented.
+Authority: frozen package-spec `181f9c2048b7cad346044a6fa4a15096166e83d4`, PKG-CONTRACT-009/010/011/012/021/022 and its machine schemas/crypto vectors. APIs remain provisional until the producer freeze; no V1 canonical/Merkle/proof/dual-sign protocol or migration is implemented.
 
 `CanonicalJSON` independently encodes the restricted JSON domain: builtin safe integer types/json.Number, valid UTF-8 strings, booleans, nil, map[string]any and []any. It rejects floats, non-integer lexical forms, unsafe integers, unsupported Go/custom-marshaler representations and invalid UTF-8. Object keys sort by UTF-8 scalar-byte order; arrays retain order; string escaping follows exact PKG-CONTRACT-022 bytes, with direct slash/HTML/U+2028/U+2029/non-BMP output and no arbitrary NFC transformation. Nil typed maps/slices represent empty objects/arrays; untyped nil represents null. `ReadCanonicalJSON` first uses the strict duplicate/number/surrogate/BOM/trailing-value parser. Actual canonical byte, collection/depth/cycle/string/key-allocation budgets precede expansion; no canonical encoding delegates ordering/escapes to encoding/json or JCS.
 

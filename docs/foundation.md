@@ -1,6 +1,6 @@
 # SDK foundation (S01)
 
-Protocol authority: [package-spec at 7ff166365dc83cee783e4e6715225968c81ef7b9](https://github.com/OrbiFabric/package-spec/tree/7ff166365dc83cee783e4e6715225968c81ef7b9), primary Chinese contracts PKG-CONTRACT-001/005/019/020/021. The SDK does not define or modify authority. Apache-2.0 applies; embedded assets retain the upstream LICENSE/NOTICE.
+Protocol authority: [package-spec at 181f9c2048b7cad346044a6fa4a15096166e83d4](https://github.com/OrbiFabric/package-spec/tree/181f9c2048b7cad346044a6fa4a15096166e83d4), primary Chinese contracts PKG-CONTRACT-001/005/019/020/021. The SDK does not define or modify authority. Apache-2.0 applies; embedded assets retain the upstream LICENSE/NOTICE.
 
 Module: `github.com/orbifabric/package-go`, package `packagego`; minimum Go 1.23. APIs remain provisional during staged implementation.
 
