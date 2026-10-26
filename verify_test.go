@@ -226,7 +226,7 @@ func TestS11SharedVerifierResults(t *testing.T) {
 	if err := json.Unmarshal(raw, &manifest); err != nil {
 		t.Fatal(err)
 	}
-	if len(manifest.Fixtures) != 30 {
+	if len(manifest.Fixtures) != 45 {
 		t.Fatal("unexpected authority inventory", len(manifest.Fixtures))
 	}
 	for _, row := range manifest.Fixtures {

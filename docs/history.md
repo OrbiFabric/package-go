@@ -1,6 +1,6 @@
 # Linear history, objects, restoration and commits (S04)
 
-Frozen authority: `7ff166365dc83cee783e4e6715225968c81ef7b9`, contracts 004/006/007/010/018/020/021. APIs remain provisional. Signatures, container representations, product DBs and network services are not prerequisites for a committed Version.
+Frozen authority: `181f9c2048b7cad346044a6fa4a15096166e83d4`, contracts 004/006/007/010/018/020/021. APIs remain provisional. Signatures, container representations, product DBs and network services are not prerequisites for a committed Version.
 
 ReadHistory reads every committed Version directory and validates documents/path/Package identity, current required-capability coverage, manifest topology, historical entry-kind continuity, and a unique actual HEAD-to-parent-to-null chain. Root ordinal is one, each child increments its single parent, and the chain must cover every Version directory once. Missing parents, cycles, detached/multiple roots and parent arrays fail. Returned records follow actual parent authority oldest first, never UUID/filename/ordinal sorting. All historical ContentID/size pairs form one sorted deduplicated union, including HEAD. Aggregate control JSON and historical entity-count budgets bound retained data. Sources must provide a stable authorized Root observation when these operations are coupled.
 

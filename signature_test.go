@@ -73,7 +73,7 @@ func TestFrozenSigningInputSignatureAndIndependentTrust(t *testing.T) {
 	}
 	// A bad signature never reaches trust, and self-described attribution alone
 	// never grants identity trust. Full content verification is independent.
-	e.SignedAt = "2026-10-06T00:00:00.000000Z"
+	e.SignedAt = "2026-10-06T00:00:00.000000+00:00"
 	item, err = pkg.VerifyVersionSignature(ctx, p, v, m, e, l, supportAllVocabulary(), pin)
 	if err != nil || item.State != pkg.SignatureInvalid || calls != 1 {
 		t.Fatal(item, err)
@@ -264,7 +264,7 @@ func TestSignatureSchemaBase64FingerprintAndSignedFacts(t *testing.T) {
 			case "wrong-subject":
 				e.SubjectDigest = pkg.ContentIDForBytes(nil)
 			case "signed-time":
-				e.SignedAt = "2026-10-06T00:00:00.000000Z"
+				e.SignedAt = "2026-10-06T00:00:00.000000+00:00"
 			case "key-label":
 				e.KeyID = "another-key"
 			}

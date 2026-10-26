@@ -1,6 +1,6 @@
 # Delivery and independent evidence (S07)
 
-Authority: frozen package-spec `7ff166365dc83cee783e4e6715225968c81ef7b9`, PKG-CONTRACT-015/018/020/021 and delivery/evidence/four subject schemas. APIs remain provisional; no V1 identity/Merkle/dual-sign behavior or migration.
+Authority: frozen package-spec `181f9c2048b7cad346044a6fa4a15096166e83d4`, PKG-CONTRACT-015/018/020/021 and delivery/evidence/four subject schemas. APIs remain provisional; no V1 identity/Merkle/dual-sign behavior or migration.
 
 `ReadDelivery` validates closed fields, UUIDv7/time, explicit reference arrays, sorted unique nonempty signature IDs and append-ordered unique evidence IDs/kinds/embedded flags. Recipient/purpose/channel are optional public, Host-selected facts, not database/runtime serialization. `DeliveryDigest` is H(J(delivery without evidence_refs)); it retains all identity/creation/recipient/purpose/channel/signature facts. `AppendEvidenceRefs` owns a validated proposal and retains the old prefix. `ValidateDeliveryAppend` rejects prior reference removal/reorder/edit or any change to receipt-bound facts. Reference count/byte guards precede expanded model allocation. These pure helpers do not authorize publication or substitute for actual reference verification.
 

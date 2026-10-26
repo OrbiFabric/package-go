@@ -46,7 +46,7 @@
       {
         "path": ".packtell/package.json",
         "kind": "file",
-        "bytes_base64": "eyJjcmVhdGVkX2F0IjoiMjAyNi0xMC0wNVQwMDowMDowMC4wMDAwMDBaIiwicGFja2FnZV9pZCI6IjAxOWEwMDAwLTAwMDAtNzAwMC04MDAwLTAwMDAwMDAwMDAwMSIsInNjaGVtYSI6Im9yYmlmYWJyaWMucGFja2FnZS5wYWNrYWdlLnYyIn0="
+        "bytes_base64": "eyJjcmVhdGVkX2F0IjoiMjAyNi0xMC0wNVQwMDowMDowMC4wMDAwMDArMDA6MDAiLCJwYWNrYWdlX2lkIjoiMDE5YTAwMDAtMDAwMC03MDAwLTgwMDAtMDAwMDAwMDAwMDAxIiwic2NoZW1hIjoib3JiaWZhYnJpYy5wYWNrYWdlLnBhY2thZ2UudjIifQ=="
       },
       {
         "path": ".packtell/versions/",

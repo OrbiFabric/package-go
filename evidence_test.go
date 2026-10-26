@@ -285,7 +285,7 @@ func TestDeliveryAndEvidenceImmutabilityAndClosedVariants(t *testing.T) {
 		t.Fatal(err)
 	}
 	changedE := e
-	changedE.Subject.ObservedAt = "2026-10-06T00:00:00.000000Z"
+	changedE.Subject.ObservedAt = "2026-10-06T00:00:00.000000+00:00"
 	err = pkg.ValidateEvidenceUnchanged(ctx, e, changedE, l)
 	requireCode(t, err, pkg.ReasonInvalidEvidence)
 	e.Subject.EventID = pkg.EventID(memoryID(70))

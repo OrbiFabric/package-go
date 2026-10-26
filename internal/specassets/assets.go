@@ -12,7 +12,7 @@ import (
 	"io/fs"
 )
 
-const Commit = "7ff166365dc83cee783e4e6715225968c81ef7b9"
+const Commit = "181f9c2048b7cad346044a6fa4a15096166e83d4"
 
 //go:embed data checksums.json
 var snapshot embed.FS

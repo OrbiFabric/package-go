@@ -22,10 +22,10 @@ type FolderID UUID
 type ContentID string
 
 const MaxProtocolInteger int64 = 9007199254740991
-const timestampLayout = "2006-01-02T15:04:05.000000Z"
+const timestampLayout = "2006-01-02T15:04:05.000000-07:00"
 
 var uuidPattern = regexp.MustCompile(`^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$`)
-var timestampPattern = regexp.MustCompile(`^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}Z$`)
+var timestampPattern = regexp.MustCompile(`^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{6}\+00:00$`)
 
 func (id UUID) Validate() error {
 	if !uuidPattern.MatchString(string(id)) {
@@ -59,11 +59,11 @@ func ParseTimestamp(s string) (time.Time, error) {
 	if err != nil || t.Year() < 1 || t.Year() > 9999 || t.Format(timestampLayout) != s {
 		return time.Time{}, protocolError(ReasonInvalidSchema, "invalid Gregorian timestamp")
 	}
-	return t, nil
+	return t.UTC(), nil
 }
 
 // Timestamp renders an explicit creation/commit time in UTC at microsecond
-// precision; it does not claim third-party timestamp trust.
+// precision and literal +00:00; it does not claim third-party timestamp trust.
 func Timestamp(t time.Time) (string, error) {
 	t = t.UTC()
 	if t.Year() < 1 || t.Year() > 9999 {

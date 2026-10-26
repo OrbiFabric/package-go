@@ -55,7 +55,7 @@ func sharedLevelManifest(t *testing.T) sharedManifest {
 	if err = json.Unmarshal(b, &m); err != nil {
 		t.Fatal(err)
 	}
-	if len(m.Levels) != 7 || len(m.Fixtures) != 30 || len(m.WriterOperations) != 2 {
+	if len(m.Levels) != 7 || len(m.Fixtures) != 45 || len(m.WriterOperations) != 2 {
 		t.Fatal("authority inventory", m)
 	}
 	return m
@@ -499,7 +499,7 @@ func TestS11SevenLevels(t *testing.T) {
 			}
 		})
 	}
-	if len(report.Cases) != 136 {
+	if len(report.Cases) != 241 {
 		t.Fatal("missing level cases", len(report.Cases))
 	}
 	if path := os.Getenv("PACKAGE_GO_CONFORMANCE_REPORT"); path != "" {

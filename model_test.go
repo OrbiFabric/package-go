@@ -143,16 +143,16 @@ func TestUUIDAndTimestampDomain(t *testing.T) {
 			t.Fatal(err)
 		}
 	}
-	for _, s := range []string{"0001-01-01T00:00:00.000000Z", "9999-12-31T23:59:59.999999Z", "2000-02-29T12:34:56.000001Z"} {
+	for _, s := range []string{"0001-01-01T00:00:00.000000+00:00", "9999-12-31T23:59:59.999999+00:00", "2000-02-29T12:34:56.000001+00:00"} {
 		if _, err := pkg.ParseTimestamp(s); err != nil {
 			t.Fatal(err)
 		}
 	}
-	for _, s := range []string{"0000-01-01T00:00:00.000000Z", "1900-02-29T00:00:00.000000Z", "2026-02-30T00:00:00.000000Z", "2026-01-01T00:00:60.000000Z", "2026-01-01T00:00:00Z", "2026-01-01T00:00:00.0000000Z", "2026-01-01T00:00:00.000000+00:00", "2026-01-01t00:00:00.000000z"} {
+	for _, s := range []string{"0000-01-01T00:00:00.000000+00:00", "1900-02-29T00:00:00.000000+00:00", "2026-02-30T00:00:00.000000+00:00", "2026-01-01T00:00:60.000000+00:00", "2026-01-01T00:00:00Z", "2026-01-01T00:00:00.0000000Z", "2026-01-01T00:00:00.000000Z", "2026-01-01t00:00:00.000000z"} {
 		_, err := pkg.ParseTimestamp(s)
 		requireCode(t, err, pkg.ReasonInvalidSchema)
 	}
-	if s, err := pkg.Timestamp(testTime.In(time.FixedZone("Host", 3600))); err != nil || s != "2026-10-05T00:00:00.123456Z" {
+	if s, err := pkg.Timestamp(testTime.In(time.FixedZone("Host", 3600))); err != nil || s != "2026-10-05T00:00:00.123456+00:00" {
 		t.Fatalf("UTC/microseconds: %s %v", s, err)
 	}
 	if _, err := pkg.Timestamp(time.Date(10000, 1, 1, 0, 0, 0, 0, time.UTC)); err == nil {
@@ -241,7 +241,7 @@ func TestImmutablePackageCreationFacts(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if p.CreatedAt != "2026-10-05T00:00:00.123456Z" || p.PackageID == "" {
+	if p.CreatedAt != "2026-10-05T00:00:00.123456+00:00" || p.PackageID == "" {
 		t.Fatal(p)
 	}
 	b, _ := json.Marshal(p)
@@ -251,7 +251,7 @@ func TestImmutablePackageCreationFacts(t *testing.T) {
 	}
 	var m map[string]any
 	json.Unmarshal(b, &m)
-	for _, edit := range []func(map[string]any){func(m map[string]any) { m["extra"] = nil }, func(m map[string]any) { delete(m, "created_at") }, func(m map[string]any) { m["package_id"] = 123 }, func(m map[string]any) { m["created_at"] = "2026-02-30T00:00:00.000000Z" }} {
+	for _, edit := range []func(map[string]any){func(m map[string]any) { m["extra"] = nil }, func(m map[string]any) { delete(m, "created_at") }, func(m map[string]any) { m["package_id"] = 123 }, func(m map[string]any) { m["created_at"] = "2026-02-30T00:00:00.000000+00:00" }} {
 		var copy map[string]any
 		json.Unmarshal(b, &copy)
 		edit(copy)

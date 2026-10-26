@@ -20,7 +20,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:875f532fe6551f7903936f9fd732be4948fcdeb8071c3838ae60ef425c2e2f4e"
+      "sha256": "sha256:75107531987bd99225bb731d2451c9435bd65ac05ea1690e2293b936076086d7"
     },
     {
       "id": "unborn",
@@ -32,7 +32,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:9113450d66d84cd96ca6cd29e3df08cf15edba6107655d5969f897577f025c4a"
+      "sha256": "sha256:4dbd03dea7ba4fde574332645d16ddc634547fc210f30993b9876bd4658aebe2"
     },
     {
       "id": "complete-history",
@@ -44,7 +44,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:86d49a450845e5892396370e33ac24e5a65df85e76163509d605a1a02998b748"
+      "sha256": "sha256:8df7660ebe680a29c33a20ef035c2c592cb0599cb9b483b3fd73b46dcd9c0454"
     },
     {
       "id": "modified-file",
@@ -56,7 +56,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:1d5416964b619521cd06700f4fdc6aa2b20af6503ae991f189460456ff54ca35"
+      "sha256": "sha256:3c74a80504a6fff77243bbce1b03397600f84276e705055f0106f44a17da757c"
     },
     {
       "id": "dirty-working-tree",
@@ -68,7 +68,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:4f7d295c586c75223087d0fb172f60c77e2525a77826dfe3d245bc1c27d5a745"
+      "sha256": "sha256:5e979321f80e1caa1d80ba76e1bb3dc67370d992e07bf4f02a7f11b2c8015af7"
     },
     {
       "id": "renamed-file",
@@ -80,7 +80,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:9dd49f880bd874bf4c276eaa180eacbb3f51f11e695fc315edc46e6bfe4530bd"
+      "sha256": "sha256:ab78edd2d685783554aaa1cf784b49100822561dada722456a696941c74d34bc"
     },
     {
       "id": "moved-file",
@@ -92,7 +92,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:f006186a9d3e65271eebe3536ebdd71072b27409b72459305ed0c107b4f201f4"
+      "sha256": "sha256:00ecd9d7c0373a9b90ed7288a1bfee51a7dfe547fc548073bcc73596880876e8"
     },
     {
       "id": "missing-object",
@@ -104,7 +104,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:0e1d731828bb9400254532b1aff2605572fb34098160177bf7f6a566ceef7a2f"
+      "sha256": "sha256:35f35bd55cea0bf7cd99d405aeb743a3c36e571a3bd36b7101396b98cd642c4b"
     },
     {
       "id": "object-hash-mismatch",
@@ -116,7 +116,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:e9b4aa457702058af0fc47dd7e34e61a79f1f54943bbdc474120f42ef38a5747"
+      "sha256": "sha256:6c24c2c1c785ec60310a367ad0a18175f50288199894552d0071786e391aceae"
     },
     {
       "id": "unknown-optional-extension",
@@ -128,7 +128,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:5e364565b9f22eebc316b8ba55c7eba3fc16acc080153a7d311deca9d20b21da"
+      "sha256": "sha256:7d0125101efeb79c9e769934798120d1c9133d00cf7006fb936ca7ae3cf646bf"
     },
     {
       "id": "unknown-required-capability",
@@ -140,7 +140,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:c5012f2088ab905c56b66316e5529fff9bbfb9cc90fca79fd9c052f80f9c5d89"
+      "sha256": "sha256:f75650521dd42e93c01ea56bbce9753574b9e92caa2efbb6f486ecb08d015671"
     },
     {
       "id": "valid-signature",
@@ -152,7 +152,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:3e25eb5893f45a50afa015a0e59b8b0982f998a94491cf965cf5556baa3f1515"
+      "sha256": "sha256:0f9bbdb7c2056823fb47d14f4b1c0ab6c8fb93a52851d1f12abae894ded2fc7d"
     },
     {
       "id": "bad-signature",
@@ -164,7 +164,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:aeea0f6a2317493de1cc56f7814ddca7b28a18a244f9566ba350ed4f4eb05eff"
+      "sha256": "sha256:64d6d8a6bb34b23ca23d1475460e1769acaf0a4412a24860763b46cda1107852"
     },
     {
       "id": "path-traversal",
@@ -176,7 +176,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:64373f8597650dafbbf042f65c548d82f8246b3aef6e5730a72697f86bfc1230"
+      "sha256": "sha256:0649802ef5ae9eb03998cf5f46d567065feaf3aeb45cc01622f29479e585b6dc"
     },
     {
       "id": "case-conflict",
@@ -188,7 +188,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:8031f5f2f5b26b7b508708cb6491477a5dd8082f8842db711d390e97c335617d"
+      "sha256": "sha256:bee4db57e1c2560c3d8977b225de45cca7688b1bfba20842d51457e7abd80853"
     },
     {
       "id": "unicode-normalization-conflict",
@@ -200,7 +200,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:995b835fc0f5ed0555f565c78b47d97cc793af82be95f62a96521f88a4b911a9"
+      "sha256": "sha256:424d54e46b8f595c08a7dc6a4715ab7d0507cd25a6db3306781e7b45975bc4e3"
     },
     {
       "id": "cloud-origin-provenance",
@@ -212,7 +212,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:b5f8e57a27752d5eeb952921fc27d1a02dbce018667f1cef133bce11f6457642"
+      "sha256": "sha256:9677875f7d6290adc03e5ac71ae62b276f3a0d90b52b85132192f8cb0ec4aef0"
     },
     {
       "id": "multi-delivery",
@@ -224,7 +224,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:a59e578df457e54bebd62e990ae998745f75719c6cdbca20548348fb95783e6f"
+      "sha256": "sha256:77ac71aae95eb4ac763795096170f547ada140bf33ec706302b750f8063a4da6"
     },
     {
       "id": "later-evidence-append",
@@ -236,7 +236,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:2c040d4b17435847d72cd4a2f78d5b2a22ef5f27314c8308829825ab9ba8187d"
+      "sha256": "sha256:3b2a840262a8dca7fe3162ace25ae75f67d9d3c291f0250674bbe678fdcf1e88"
     },
     {
       "id": "cycle",
@@ -248,7 +248,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:4fc3015587e91cddd7669f7ee23f7e769ed2e5e7d24bf5ff06d333c0f9323629"
+      "sha256": "sha256:065f0ca59914b51a8643927709ebb82b5417c017ba58b17ac5ed34b4b395f6db"
     },
     {
       "id": "missing-parent",
@@ -260,7 +260,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:215f5a1ebbaee80248a7e2a177eac2ce2381b9874ef0793f687c8244356bdac7"
+      "sha256": "sha256:0b26e98e356ae74914aacf90918e17a9f4c56402b7268ee38dbcfdaedee2abdc"
     },
     {
       "id": "multiple-roots",
@@ -272,7 +272,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:ca7972ba2b76ccbf77461dbba3691d267bdecaa9120fe58841ebd4169a2ac0b2"
+      "sha256": "sha256:34db0c5d99275cb3db824743a4d14c8fbd8f30800178fc23e97e0c1cddd09f55"
     },
     {
       "id": "detached-version",
@@ -284,7 +284,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:5bc7b18fbe1e1f9cad4fc2fd241316852784f0df3459095e2b8365ce7812e34f"
+      "sha256": "sha256:39b806c42bf9ba25a60053247735444c24faf94a56d9e386a2808b9170f109c6"
     },
     {
       "id": "multiple-parents",
@@ -296,7 +296,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:5c718fcf7b9425e106db4d5a6e563a76976bd4d319368550f70de7729e45a45e"
+      "sha256": "sha256:ea3d359c6dd7c7d5b7f0e1694b73af6b436dfed1c4ddb14e9606d20415634a73"
     },
     {
       "id": "invalid-head-crlf",
@@ -308,7 +308,7 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:03466f618b62b7bcebe1a1801e4fbd4a7c7492b4573853fb000f0547b75c2171"
+      "sha256": "sha256:f768ff7ce24d88f7872f800e730b7666b4440258f5eb767920883c93852ae6ff"
     },
     {
       "id": "zip-wrapped",
@@ -316,7 +316,7 @@
       "levels": [
         "ZIP Codec"
       ],
-      "sha256": "sha256:ed549a2229fa239b94e47473cd1417a1bb7b6aa0a1247c78eac507653c142fcc"
+      "sha256": "sha256:b9564633cc16f1c9e4869770060fdcab1ff5e139cb50547544e7513006162918"
     },
     {
       "id": "zip-unwrapped",
@@ -324,7 +324,7 @@
       "levels": [
         "ZIP Codec"
       ],
-      "sha256": "sha256:c204438522039d2e6f4d878128a438a1725211c34d29e39c78d44404065f458d"
+      "sha256": "sha256:ecdc1e915d5476041fcee5bd75935f30ecb764d801d9cee2494e2d322c0ec656"
     },
     {
       "id": "zip-traversal",
@@ -332,7 +332,7 @@
       "levels": [
         "ZIP Codec"
       ],
-      "sha256": "sha256:81c63828df00f1354b8595d289d55757b6c8310088004eea263c04125b966c7c"
+      "sha256": "sha256:e3c92ba36b2fa56d1e4e908a2b3da147eed22e5a3e4c2d45155de75e87f2c484"
     },
     {
       "id": "zip-duplicate",
@@ -340,7 +340,7 @@
       "levels": [
         "ZIP Codec"
       ],
-      "sha256": "sha256:d1012cc18be6cc07f71d66f206e2fa7bf797270347673186391e844a27156499"
+      "sha256": "sha256:b29236fc518e7f9ba25608e4bb9f7547ec2b1c58782c74f221bb8c9b0d8f7296"
     },
     {
       "id": "core-minimal",
@@ -354,7 +354,217 @@
         "Directory Codec",
         "ZIP Codec"
       ],
-      "sha256": "sha256:f3a5ae30c7bd2d09f93d2b649816100275a35165ec88bcae3e46ca7f48621182"
+      "sha256": "sha256:8bb3a7ccd08bab0f18fa8037fd6f326b7167373ec0515dbceb1ef7805259758e"
+    },
+    {
+      "id": "noncanonical-time-01",
+      "path": "../fixtures/noncanonical-time-01.json",
+      "levels": [
+        "Core Reader",
+        "Core Writer",
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:f4ae59a0e7c416fbb2e2793088b9f17986db63797e829ca7e8208f4463483ba7"
+    },
+    {
+      "id": "noncanonical-time-02",
+      "path": "../fixtures/noncanonical-time-02.json",
+      "levels": [
+        "Core Reader",
+        "Core Writer",
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:8fa0bdeb9630ef75b57cf48aefef382ec9f7f08187a3370def2ec5d1e67bd715"
+    },
+    {
+      "id": "noncanonical-time-03",
+      "path": "../fixtures/noncanonical-time-03.json",
+      "levels": [
+        "Core Reader",
+        "Core Writer",
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:353f4a45f1b8d4897aa17606b1a489fd442b68392949a2c21e4b4f96eb4e2f5d"
+    },
+    {
+      "id": "noncanonical-time-04",
+      "path": "../fixtures/noncanonical-time-04.json",
+      "levels": [
+        "Core Reader",
+        "Core Writer",
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:1cd7571cb3db143e7d0f8251a797c89631e7b56e5440f2d855a2090abf003379"
+    },
+    {
+      "id": "noncanonical-time-05",
+      "path": "../fixtures/noncanonical-time-05.json",
+      "levels": [
+        "Core Reader",
+        "Core Writer",
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:aa57a9ac49f67cf47ee97ecd7a34279e12d6ac929ff805a4a5d344a3c9bd03b2"
+    },
+    {
+      "id": "noncanonical-time-06",
+      "path": "../fixtures/noncanonical-time-06.json",
+      "levels": [
+        "Core Reader",
+        "Core Writer",
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:0e8bcda03f541a1265562897201cd0a32b9181104ea96e66d79d131f0f3b0f9e"
+    },
+    {
+      "id": "noncanonical-time-07",
+      "path": "../fixtures/noncanonical-time-07.json",
+      "levels": [
+        "Core Reader",
+        "Core Writer",
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:67b2a547adffe44ceff66ccd80d54cf387ffa4a9f26a9c86b4423bfaf65bf2e0"
+    },
+    {
+      "id": "noncanonical-time-08",
+      "path": "../fixtures/noncanonical-time-08.json",
+      "levels": [
+        "Core Reader",
+        "Core Writer",
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:4f2297c64bdd4c5c34249cadd29cc495627a12e4cfcd791e4d2620756ede27bd"
+    },
+    {
+      "id": "noncanonical-time-09",
+      "path": "../fixtures/noncanonical-time-09.json",
+      "levels": [
+        "Core Reader",
+        "Core Writer",
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:d6d280aa0d31fe5468a3b638b157a0aed9a07dad7b623919e34cb5a78e281993"
+    },
+    {
+      "id": "noncanonical-time-10",
+      "path": "../fixtures/noncanonical-time-10.json",
+      "levels": [
+        "Core Reader",
+        "Core Writer",
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:22498a745992bc0896536767f2cf3119afd9f5654d76e1e9d51a5057a2575cc6"
+    },
+    {
+      "id": "noncanonical-time-11",
+      "path": "../fixtures/noncanonical-time-11.json",
+      "levels": [
+        "Core Reader",
+        "Core Writer",
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:35484fa84d8c44af44e74dbec08a40c99d999fd45c996652bb369d6ea8ae6801"
+    },
+    {
+      "id": "noncanonical-time-12",
+      "path": "../fixtures/noncanonical-time-12.json",
+      "levels": [
+        "Core Reader",
+        "Core Writer",
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:2e668eb525ebedf2267360807214bc290b6477100247968218218d348f5911c7"
+    },
+    {
+      "id": "noncanonical-time-13",
+      "path": "../fixtures/noncanonical-time-13.json",
+      "levels": [
+        "Core Reader",
+        "Core Writer",
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:01b93d937f2b9245d116aba1ea7320f2f10cbb075a6c7044bdc573cf51985b22"
+    },
+    {
+      "id": "noncanonical-time-14",
+      "path": "../fixtures/noncanonical-time-14.json",
+      "levels": [
+        "Core Reader",
+        "Core Writer",
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:5285c7e5f82c3c1cece2d126c8e117c2e0d7f148f7d9442df91b609cfff16c9f"
+    },
+    {
+      "id": "noncanonical-time-15",
+      "path": "../fixtures/noncanonical-time-15.json",
+      "levels": [
+        "Core Reader",
+        "Core Writer",
+        "Complete Reader",
+        "Complete Writer",
+        "Verifier",
+        "Directory Codec",
+        "ZIP Codec"
+      ],
+      "sha256": "sha256:e64b3dc69ae07b33184c77ba122e293063fb2c84d9f52026cbf2a02fea46eca3"
     }
   ],
   "vectors": [
