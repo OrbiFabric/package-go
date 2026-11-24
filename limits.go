@@ -76,6 +76,15 @@ func ReadBounded(ctx context.Context, r io.Reader, max int64) ([]byte, error) {
 	return b, nil
 }
 
+// The Host can reauthorize its source on each Read. Larger bounded blocks
+// amortize that cost when the SDK hashes content without delivering bytes.
+func hashReadBuffer(size int64) []byte {
+	if size <= 32<<10 {
+		return nil // io.CopyBuffer uses its normal bounded copy for small files.
+	}
+	return make([]byte, min(size, 1<<20))
+}
+
 // CopyVerifiedContent writes only to caller-isolated pending output. Even on
 // success it does not publish output. Host errors, cancellation, count or hash
 // failures require discarding that pending output; Working Tree bytes may not
@@ -100,7 +109,11 @@ func CopyVerifiedContent(ctx context.Context, dst io.Writer, src io.Reader, cont
 		return fmt.Errorf("nil content stream")
 	}
 	hash := sha256.New()
-	n, err := io.Copy(io.MultiWriter(dst, hash), io.LimitReader(contextReader{ctx, src}, size+1))
+	var buffer []byte
+	if dst == io.Discard {
+		buffer = hashReadBuffer(size)
+	}
+	n, err := io.CopyBuffer(io.MultiWriter(dst, hash), io.LimitReader(contextReader{ctx, src}, size+1), buffer)
 	if err != nil {
 		return err
 	}
