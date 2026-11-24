@@ -119,7 +119,7 @@ func Scan(ctx context.Context, source SnapshotSource, l Limits, support Capabili
 				return out, schemaError("missing payload stream")
 			}
 			h := sha256.New()
-			n, readErr := io.Copy(h, io.LimitReader(contextReader{ctx, r}, e.Size+1))
+			n, readErr := io.CopyBuffer(h, io.LimitReader(contextReader{ctx, r}, e.Size+1), hashReadBuffer(e.Size))
 			closeErr := r.Close()
 			if readErr != nil {
 				return out, readErr
